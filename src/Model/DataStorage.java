@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 public class DataStorage {
     private static ObservableList<User> userList = FXCollections.observableArrayList();
+    //private static ObservableList<Customer> CustomerList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers()
     {

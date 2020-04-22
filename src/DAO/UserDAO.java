@@ -14,7 +14,7 @@ public class UserDAO {
 
     public static void getAllUsers() {
         try {
-            // start the database with an instance variable
+            // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement
             String selectStatement = "SELECT userId, userName, password FROM U06NwI.user";

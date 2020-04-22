@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.DataStorage;
+import Utils.CheckUserPassword;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -31,7 +31,7 @@ public class LoginScreenController {
     void onActionLogin(ActionEvent event) {
         String userName = userNameField.getText();
         String password = passwordField.getText();
-        if(Utils.CheckPassword.checkPassword(userName, password) == true) {
+        if(CheckUserPassword.checkPassword(userName, password) == true) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setContentText("You win a donut!");
