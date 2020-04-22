@@ -1,7 +1,9 @@
 package Software2;
 
+import DAO.CityDAO;
 import DAO.CountryDAO;
 import DAO.UserDAO;
+import Model.City;
 import Model.Country;
 import Model.DataStorage;
 import Model.User;
@@ -29,6 +31,10 @@ public class Main extends Application {
 
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
+
+        City city = CityDAO.getCity("Toronto");
+
+        System.out.println(city.getCountryID() + " " + city.getCityName());
 
         //launch GUI
         launch(args);
