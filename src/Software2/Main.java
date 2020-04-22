@@ -1,7 +1,10 @@
 package Software2;
 
 import DAO.UserDAO;
+import Model.DataStorage;
 import Model.User;
+import Utils.DBConnection;
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -13,21 +16,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/LoginScreen.fxml"));
+        //primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
 
-        ObservableList<User> userList = UserDAO.getAllUsers();
-        for(User user: userList) {
-            System.out.println("UserID: " + user.getUserID() + " || userName: " +
-                    user.getUserName() + " || pwd: " + user.getPassword());
-        }
+        //download user list from database and store in DataStorage class
+        UserDAO.getAllUsers();
 
+        //launch GUI
         launch(args);
 
     }

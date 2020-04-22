@@ -1,9 +1,10 @@
-package Utilities;
+package Utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+//this class handles prepared statements
 public class DBQuery {
     private static PreparedStatement statement;
 

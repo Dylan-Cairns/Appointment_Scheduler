@@ -1,9 +1,10 @@
-package Utilities;
+package Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//this class establishes and closes connections to the database
 public class DBConnection {
     //JDBC URL parts
     private static final String protocol = "jdbc";

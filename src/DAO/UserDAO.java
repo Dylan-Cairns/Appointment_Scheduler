@@ -1,10 +1,9 @@
 package DAO;
 
+import Model.DataStorage;
 import Model.User;
-import Utilities.DBConnection;
-import Utilities.DBQuery;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Utils.DBConnection;
+import Utils.DBQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +12,7 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    public static ObservableList<User> getAllUsers() {
-        ObservableList<User> userList = FXCollections.observableArrayList();
+    public static void getAllUsers() {
         try {
             // start the database with an instance variable
             Connection conn = DBConnection.getConnection();
@@ -32,13 +30,12 @@ public class UserDAO {
                 String userName=rs.getString("userName");
                 String password=rs.getString("password");
                 User user = new User(userID, userName, password);
-                userList.add(user);
+                DataStorage.addUser(user);
             }
             rs.close();
             DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return userList;
     }
 }
