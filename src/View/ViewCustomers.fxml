@@ -58,8 +58,8 @@
               <columns>
                 <TableColumn fx:id="ViewCustTableviewNameCol" prefWidth="300.0" text="Name" />
                 <TableColumn fx:id="ViewCustTableviewCityCol" prefWidth="200.0" text="City" />
-                  <TableColumn fx:id="ViewCustTableviewStateCol" prefWidth="85.0" text="State" />
-                  <TableColumn fx:id="ViewCustTableviewPhoneCol" prefWidth="150.0" text="Phone" />
+                  <TableColumn fx:id="ViewCustTableviewStateCol" text="State" />
+                  <TableColumn fx:id="ViewCustTableviewPhoneCol" prefWidth="160.0" text="Phone" />
               </columns>
                <VBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
