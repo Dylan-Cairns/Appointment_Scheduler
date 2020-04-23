@@ -5,16 +5,26 @@ import javafx.collections.ObservableList;
 
 public class DataStorage {
     private static ObservableList<User> userList = FXCollections.observableArrayList();
-    //private static ObservableList<Customer> CustomerList = FXCollections.observableArrayList();
+    private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers()
     {
         return userList;
     }
 
+    public static ObservableList<Customer> getAllCustomers()
+    {
+        return customerList;
+    }
+
     public static void addUser(User user)
     {
         userList.add(user);
+    }
+
+    public static void addCustomer(Customer customer)
+    {
+        customerList.add(customer);
     }
 
     public static User lookupUser(int userID)

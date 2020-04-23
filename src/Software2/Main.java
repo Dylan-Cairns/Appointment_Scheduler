@@ -21,7 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../View/LoginScreen.fxml"));
-        //primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Appointment Scheduler");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -34,7 +34,7 @@ public class Main extends Application {
 
         City city = CityDAO.getCity("Toronto");
 
-        System.out.println(city.getCountryID() + " " + city.getCityName());
+        System.out.println(city.getCityID() + " " + city.getCityName());
 
         //launch GUI
         launch(args);

@@ -3,12 +3,12 @@ package Model;
 public class City {
     private int cityID;
     private String cityName;
-    private int countryID;
+    private Country country;
 
-    public City(int cityID, String cityName, int countryID) {
+    public City(int cityID, String cityName, Country country) {
         this.cityID = cityID;
         this.cityName = cityName;
-        this.countryID = countryID;
+        this.country = country;
     }
 
     public int getCityID() {
@@ -19,7 +19,7 @@ public class City {
         return cityName;
     }
 
-    public int getCountryID() {
-        return countryID;
+    public Country getCountry() {
+        return country;
     }
 }
