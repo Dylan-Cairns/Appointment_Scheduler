@@ -32,13 +32,11 @@ public class CustomerDAO {
                 Address address = AddressDAO.getAddressByID(addressID);
                 Customer returnedCustomer = new Customer(customerID, customerName, address);
                 rs.close();
-                DBConnection.closeConnection();
                 return returnedCustomer;
             }
             else {
                 System.out.println("No matching customer found");
                 rs.close();
-                DBConnection.closeConnection();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
