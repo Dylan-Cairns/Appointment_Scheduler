@@ -1,13 +1,23 @@
 package Controller;
 
 import Utils.CheckUserPassword;
+import Utils.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginScreenController {
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private TextField userNameField;
@@ -23,19 +33,20 @@ public class LoginScreenController {
 
     @FXML
     void onActionExit(ActionEvent event) {
-
+        DBConnection.closeConnection();
         System.exit(0);
     }
 
     @FXML
-    void onActionLogin(ActionEvent event) {
+    void onActionLogin(ActionEvent event) throws IOException {
         String userName = userNameField.getText();
         String password = passwordField.getText();
         if(CheckUserPassword.checkPassword(userName, password) == true) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("You win a donut!");
-            alert.showAndWait();
+            stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            stage.setTitle("Appointment Scheduler");
+            stage.setScene(new Scene(scene));
+            stage.show();
         }
         else
         {

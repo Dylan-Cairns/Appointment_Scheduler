@@ -2,11 +2,19 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ViewCustomersController {
+    Stage stage;
+    Parent scene;
 
     @FXML
     private TextField customerSearchTxtBox;
@@ -36,8 +44,12 @@ public class ViewCustomersController {
     private TableColumn<?, ?> ViewCustTableviewPhoneCol;
 
     @FXML
-    void onActionAddCustomer(ActionEvent event) {
-
+    void onActionAddCustomer(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
+        stage.setTitle("View customers");
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML

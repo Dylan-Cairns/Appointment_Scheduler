@@ -31,7 +31,8 @@ public class CityDAO {
                 int cityId=rs.getInt("cityId");
                 String city=rs.getString("city");
                 int countryID=rs.getInt("countryId");
-                City returnedCity = new City(cityId, city, countryID);
+                Country country = CountryDAO.getCountryByID(countryID);
+                City returnedCity = new City(cityId, city, country);
                 rs.close();
                 DBConnection.closeConnection();
                 return returnedCity;
@@ -40,6 +41,39 @@ public class CityDAO {
                 System.out.println("No matching city found");
                 rs.close();
                 DBConnection.closeConnection();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static City getCityByID(int cityID) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT cityId, city, countryId FROM U06NwI.city WHERE cityId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Set value cityName to be passed to function in select statement
+            ps.setInt(1, cityID);
+            //Saver results into result set
+            ResultSet rs = ps.executeQuery();
+            //Check there is an entry, if so, return entry
+            if(rs.next()) {
+                String city=rs.getString("city");
+                int countryID=rs.getInt("countryId");
+                Country country = CountryDAO.getCountryByID(countryID);
+                City returnedCity = new City(cityID, city, country);
+                rs.close();
+                return returnedCity;
+            }
+            else {
+                System.out.println("No matching city found");
+                rs.close();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -44,4 +44,36 @@ public class CountryDAO {
         }
         return null;
     }
+
+    public static Country getCountryByID(int countryID) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT countryId, country FROM U06NwI.country WHERE countryId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Set value countryName to be passed to function in select statement
+            ps.setInt(1, countryID);
+            //Save results into result set
+            ResultSet rs = ps.executeQuery();
+            //Check there is an entry, if so, return entry
+            if(rs.next()) {
+                int tempCountryID=rs.getInt("countryId");
+                String country=rs.getString("country");
+                Country returnedCountry = new Country(tempCountryID, country);
+                rs.close();
+                return returnedCountry;
+            }
+            else {
+                System.out.println("No matching country found");
+                rs.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -2,11 +2,9 @@ package Software2;
 
 import DAO.CityDAO;
 import DAO.CountryDAO;
+import DAO.CustomerDAO;
 import DAO.UserDAO;
-import Model.City;
-import Model.Country;
-import Model.DataStorage;
-import Model.User;
+import Model.*;
 import Utils.DBConnection;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.application.Application;
@@ -15,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import static Model.DataStorage.getAllCustomers;
 
 public class Main extends Application {
 
@@ -31,10 +31,6 @@ public class Main extends Application {
 
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
-
-        City city = CityDAO.getCity("Toronto");
-
-        System.out.println(city.getCityID() + " " + city.getCityName());
 
         //launch GUI
         launch(args);
