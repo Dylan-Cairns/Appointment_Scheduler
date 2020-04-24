@@ -23,13 +23,16 @@ public class ViewCustomersController {
     private Button customerSearchButton;
 
     @FXML
-    private Button viewCustomerButton11;
+    private Button viewCustomerButton;
 
     @FXML
-    private Button deleteCustomerButton11;
+    private Button deleteCustomerButton;
 
     @FXML
-    private Button addCustomerButton11;
+    private Button addCustomerButton;
+
+    @FXML
+    private Button backToMenuButton;
 
     @FXML
     private TableColumn<?, ?> ViewCustTableviewNameCol;
@@ -46,7 +49,7 @@ public class ViewCustomersController {
     @FXML
     void onActionAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/AddEditCustomer.fxml"));
         stage.setTitle("View customers");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -65,6 +68,15 @@ public class ViewCustomersController {
     @FXML
     void onActionViewCustomer(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onActionBackToMenu(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        stage.setTitle("Appointment Scheduler");
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
 }

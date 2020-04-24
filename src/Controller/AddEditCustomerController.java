@@ -32,7 +32,7 @@ public class AddEditCustomerController {
     private TextField address2TextField;
 
     @FXML
-    private TextField cityTextField;
+    private ChoiceBox<?> cityChoiceBox;
 
     @FXML
     private ChoiceBox<?> stateChoiceBox;
