@@ -74,7 +74,7 @@ public class ViewCustomersController implements Initializable {
 
     @FXML
     void onActionSearchCustomer(ActionEvent event) {
-
+        ViewCustTableview.setItems(DataStorage.lookupCustomer(customerSearchTxtBox.getText()));
     }
 
     @FXML

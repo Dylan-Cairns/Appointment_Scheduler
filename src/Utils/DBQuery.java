@@ -12,6 +12,10 @@ public class DBQuery {
         statement = conn.prepareStatement(sqlStatement);
     }
 
+    public static void setPreparedStatementReturnKeys(Connection conn, String sqlStatement) throws SQLException {
+        statement = conn.prepareStatement(sqlStatement, PreparedStatement.RETURN_GENERATED_KEYS);
+    }
+
     public static PreparedStatement getPreparedStatement() {
         return statement;
     }

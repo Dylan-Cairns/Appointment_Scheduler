@@ -17,6 +17,15 @@ public class Address {
         this.phone = phone;
     }
 
+    public Address(String addressLine1, String addressLine2, City city, String postalCode, String phone) {
+        this.addressID = addressID;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.postalCode = postalCode;
+        this.phone = phone;
+    }
+
     public int getAddressID() {
         return addressID;
     }

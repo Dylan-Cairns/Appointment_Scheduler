@@ -4,10 +4,10 @@ import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+
+import static java.lang.Integer.parseInt;
 
 public class AddressDAO {
 
@@ -47,5 +47,43 @@ public class AddressDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public static int addNewAddress(Address address) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String insertStatement = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatementReturnKeys(conn, insertStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //PreparedStatement ps = conn.prepareStatement(insertStatement, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, address.getAddressLine1());
+            ps.setString(2, address.getAddressLine2());
+            ps.setInt(3, address.getCity().getCityID());
+            ps.setString(4, address.getPostalCode());
+            ps.setString(5, address.getPhone());
+            ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(7, "test");
+            ps.setString(8, LocalDateTime.now().toString());
+            ps.setString(9, "test");
+            //Check save was successful
+            int res = ps.executeUpdate();
+            if (res == 1) {//one row was affected; namely the one that was inserted!
+                System.out.println("YAY!");
+            } else {
+                System.out.println("BOO!");
+            }
+            ResultSet genKeys = ps.getGeneratedKeys();
+            genKeys.next();
+            int generatedKey = genKeys.getInt(1);
+            return generatedKey;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
     }
 }

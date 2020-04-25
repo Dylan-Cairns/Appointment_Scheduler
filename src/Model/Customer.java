@@ -11,6 +11,12 @@ public class Customer {
         this.address = address;
     }
 
+    public Customer(String customerName, Address address) {
+        this.customerID = customerID;
+        this.customerName = customerName;
+        this.address = address;
+    }
+
     public int getCustomerID() {
         return customerID;
     }

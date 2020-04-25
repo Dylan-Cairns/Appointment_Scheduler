@@ -4,10 +4,8 @@ import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 
 public class CustomerDAO {
 
@@ -65,6 +63,40 @@ public class CustomerDAO {
                 }
             }
             rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void addNewCustomer(Customer customer) {
+        int addressId = AddressDAO.addNewAddress(customer.getAddress());
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String insertStatement = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, insertStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+
+            ps.setString(1, customer.getCustomerName());
+            ps.setInt(2, addressId);
+            ps.setInt(3, 1);
+            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(5, "test");
+            ps.setString(6, LocalDateTime.now().toString());
+            ps.setString(7, "test");
+            //Saver results into result set
+            //Check save was successful
+            int res = ps.executeUpdate();
+
+            if (res == 1) {//one row was affected; namely the one that was inserted!
+                System.out.println("YAY!");
+            } else {
+                System.out.println("BOO!");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

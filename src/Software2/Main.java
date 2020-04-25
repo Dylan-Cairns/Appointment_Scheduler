@@ -1,9 +1,6 @@
 package Software2;
 
-import DAO.CityDAO;
-import DAO.CountryDAO;
-import DAO.CustomerDAO;
-import DAO.UserDAO;
+import DAO.*;
 import Model.*;
 import Utils.DBConnection;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
@@ -33,9 +30,11 @@ public class Main extends Application {
         UserDAO.getAllUsers();
         CustomerDAO.getAllCustomers();
 
-        for(Customer customer: DataStorage.getAllCustomers()) {
-            System.out.println("1 little customer");
-        }
+        City city = DataStorage.getAllCustomers().get(1).getAddress().getCity();
+        Address address = new Address("Waffle Shop", "waffle St", city, "8008", "1234567899");
+        Customer customer = new Customer("Dunkin Stunkin", address);
+        CustomerDAO.addNewCustomer(customer);
+
 
         //launch GUI
         launch(args);
