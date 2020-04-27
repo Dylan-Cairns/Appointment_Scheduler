@@ -57,6 +57,7 @@ public class AddressDAO {
             String insertStatement = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             //Set prepared statement in DBQuery class
+            //this method will return the primary key created for the address in the DB
             DBQuery.setPreparedStatementReturnKeys(conn, insertStatement);
             //Instantiate prepared statement
             PreparedStatement ps = DBQuery.getPreparedStatement();
@@ -77,9 +78,11 @@ public class AddressDAO {
             } else {
                 System.out.println("BOO!");
             }
+            //resultset contains addressId of the new address
             ResultSet genKeys = ps.getGeneratedKeys();
             genKeys.next();
             int generatedKey = genKeys.getInt(1);
+            //return the addressId
             return generatedKey;
         } catch (SQLException throwables) {
             throwables.printStackTrace();

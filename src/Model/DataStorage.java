@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 public class DataStorage {
     private static ObservableList<User> userList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
+    private static ObservableList<City> cityList = FXCollections.observableArrayList();
+    private static ObservableList<Country> countryList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
@@ -16,12 +18,26 @@ public class DataStorage {
         return customerList;
     }
 
+    public static ObservableList<City> getAllCities() { return cityList; }
+
+    public static ObservableList<Country> getAllCountries() {
+        return countryList;
+    }
+
     public static void addUser(User user) {
         userList.add(user);
     }
 
     public static void addCustomer(Customer customer) {
         customerList.add(customer);
+    }
+
+    public static void addCity(City city) {
+        cityList.add(city);
+    }
+
+    public static void addCountry(Country country) {
+        countryList.add(country);
     }
 
     public static User lookupUser(int userID) {
@@ -56,5 +72,11 @@ public class DataStorage {
             }
         }
         return customerSearchResults;
+    }
+
+    public static void emptyStoredData() {
+        customerList.clear();
+        cityList.clear();
+        countryList.clear();
     }
 }

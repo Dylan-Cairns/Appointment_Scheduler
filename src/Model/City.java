@@ -22,4 +22,10 @@ public class City {
     public Country getCountry() {
         return country;
     }
+
+    //override tostring method so that combobox displays city names in edit menu
+    @Override
+    public String toString() {
+        return this.getCityName();
+    }
 }

@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.CustomerDAO;
 import Model.Customer;
 import Model.DataStorage;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -11,14 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ViewCustomersController implements Initializable {
@@ -69,7 +68,30 @@ public class ViewCustomersController implements Initializable {
 
     @FXML
     void onActionDeleteCustomer(ActionEvent event) {
+        if(ViewCustTableview.getSelectionModel().getSelectedItem() != null)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setContentText("Delete customer?");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK)
+            {
+                CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
+                CustomerDAO.getAllCustomers();
+                for(Customer customer: DataStorage.getAllCustomers()) {
+                    System.out.println(customer.getCustomerName());
+                }
+                ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please select a customer to delete.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -110,6 +132,7 @@ public class ViewCustomersController implements Initializable {
             return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone());
         });
 
+        CustomerDAO.getAllCustomers();
         ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
     }
 }

@@ -4,6 +4,7 @@ import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -44,6 +45,8 @@ public class CustomerDAO {
 
     public static void getAllCustomers() {
         try {
+            //Clear the old entries from the customer list before adding new entries from database
+            DataStorage.emptyStoredData();
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement
@@ -59,7 +62,11 @@ public class CustomerDAO {
                 int customerID=rs.getInt("customerId");
                 Customer customer = getCustomerByID(customerID);
                 if(customer != null) {
+                    //add customer to customer list
                     DataStorage.addCustomer(customer);
+                    //store city and country in lists, which are used to populate comboboxes for edit customer screen
+                    DataStorage.addCity(customer.getAddress().getCity());
+                    DataStorage.addCountry(customer.getAddress().getCity().getCountry());
                 }
             }
             rs.close();
@@ -68,7 +75,8 @@ public class CustomerDAO {
         }
     }
 
-    public static void addNewCustomer(Customer customer) {
+    public static boolean addNewCustomer(Customer customer) {
+        //call AddressDAO to insert the address into the DB and return it's addressId
         int addressId = AddressDAO.addNewAddress(customer.getAddress());
         try {
             // start the database connection with an instance variable
@@ -93,12 +101,39 @@ public class CustomerDAO {
             int res = ps.executeUpdate();
 
             if (res == 1) {//one row was affected; namely the one that was inserted!
-                System.out.println("YAY!");
+                System.out.println("Customer added!");
+                return true;
             } else {
-                System.out.println("BOO!");
+                System.out.println("Customer not added");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return false;
+    }
+
+    public static boolean deleteCustomer(int customerID) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "DELETE FROM U06NwI.customer WHERE customerId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Set value cityName to be passed to function in select statement
+            ps.setInt(1, customerID);
+            int res = ps.executeUpdate();
+            if (res == 1) {//one row was affected; namely the one that was deleted!
+                System.out.println("Customer deleted");
+                return true;
+            } else {
+                System.out.println("Customer not deleted");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

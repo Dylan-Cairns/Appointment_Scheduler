@@ -30,12 +30,6 @@ public class Main extends Application {
         UserDAO.getAllUsers();
         CustomerDAO.getAllCustomers();
 
-        City city = DataStorage.getAllCustomers().get(1).getAddress().getCity();
-        Address address = new Address("Waffle Shop", "waffle St", city, "8008", "1234567899");
-        Customer customer = new Customer("Dunkin Stunkin", address);
-        CustomerDAO.addNewCustomer(customer);
-
-
         //launch GUI
         launch(args);
 
