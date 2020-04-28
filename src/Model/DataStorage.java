@@ -9,6 +9,7 @@ public class DataStorage {
     private static ObservableList<City> cityList = FXCollections.observableArrayList();
     private static ObservableList<Country> countryList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
+    private static Customer customerToSave = null;
 
     public static ObservableList<User> getAllUsers() {
         return userList;
@@ -74,9 +75,31 @@ public class DataStorage {
         return customerSearchResults;
     }
 
+    //find the index of a city in the cityList
+    public static int lookupCityIndex(City searchCity) {
+        for (City city: getAllCities()) {
+            if (city.getCityID() == (searchCity.getCityID())) {
+                return getAllCities().indexOf(city);
+            }
+        }
+        return -1;
+    }
+
     public static void emptyStoredData() {
         customerList.clear();
         cityList.clear();
         countryList.clear();
+    }
+
+    public static Customer getCustomerToSave() {
+        return customerToSave;
+    }
+
+    public static void setCustomerToSave(Customer customerToSave) {
+        DataStorage.customerToSave = customerToSave;
+    }
+
+    public static void clearCustomerToSave() {
+        DataStorage.customerToSave = null;
     }
 }

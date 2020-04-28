@@ -112,6 +112,44 @@ public class CustomerDAO {
         return false;
     }
 
+    public static boolean updateCustomer(Customer customer) {
+        //call AddressDAO to insert the address into the DB and return it's addressId
+        int addressId = AddressDAO.addNewAddress(customer.getAddress());
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String insertStatement = "UPDATE customer set customerName=? addressId=? " +
+                    "active=? createDate=? createdBy=? lastUpdate=? lastUpdateBy=? WHERE customerId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, insertStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+
+            ps.setString(1, customer.getCustomerName());
+            ps.setInt(2, addressId);
+            ps.setInt(3, 1);
+            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(5, "test");
+            ps.setString(6, LocalDateTime.now().toString());
+            ps.setString(7, "test");
+            ps.setInt(8, DataStorage.getCustomerToSave().getCustomerID());
+            //Saver results into result set
+            //Check save was successful
+            int res = ps.executeUpdate();
+
+            if (res == 1) {//one row was affected; namely the one that was inserted!
+                System.out.println("Customer updated!");
+                return true;
+            } else {
+                System.out.println("Customer updated");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean deleteCustomer(int customerID) {
         try {
             // start the database connection with an instance variable

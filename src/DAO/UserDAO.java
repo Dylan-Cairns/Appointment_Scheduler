@@ -33,7 +33,6 @@ public class UserDAO {
                 DataStorage.addUser(user);
             }
             rs.close();
-            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

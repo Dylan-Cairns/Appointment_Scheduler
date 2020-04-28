@@ -73,10 +73,10 @@ public class AddressDAO {
             ps.setString(9, "test");
             //Check save was successful
             int res = ps.executeUpdate();
-            if (res == 1) {//one row was affected; namely the one that was inserted!
-                System.out.println("YAY!");
+            if (res == 1) {//one row was affected
+                System.out.println("Address added");
             } else {
-                System.out.println("BOO!");
+                System.out.println("Address not added");
             }
             //resultset contains addressId of the new address
             ResultSet genKeys = ps.getGeneratedKeys();

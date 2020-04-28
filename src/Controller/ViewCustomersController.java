@@ -79,9 +79,6 @@ public class ViewCustomersController implements Initializable {
             {
                 CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
                 CustomerDAO.getAllCustomers();
-                for(Customer customer: DataStorage.getAllCustomers()) {
-                    System.out.println(customer.getCustomerName());
-                }
                 ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
             }
         }
@@ -100,8 +97,27 @@ public class ViewCustomersController implements Initializable {
     }
 
     @FXML
-    void onActionViewCustomer(ActionEvent event) {
-
+    void onActionViewCustomer(ActionEvent event) throws IOException {
+        if (ViewCustTableview.getSelectionModel().getSelectedItem() != null)
+        {
+            Stage stage;
+            Parent root;
+            stage=(Stage) viewCustomerButton.getScene().getWindow();
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/AddEditCustomer.fxml"));
+            root =loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            AddEditCustomerController AECController = loader.getController();
+            AECController.receiveCustomer(ViewCustTableview.getSelectionModel().getSelectedItem());
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please select a customer to edit.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

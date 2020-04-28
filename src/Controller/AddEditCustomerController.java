@@ -71,10 +71,25 @@ public class AddEditCustomerController implements Initializable {
             City city = cityComboBox.getSelectionModel().getSelectedItem();
             String postalCode = (postalCodeTextBox.getText());
             String phone = phoneTextField.getText();
-            Address address = new Address(address1, address2, city, postalCode, phone);
             String name = (nameTextBox.getText());
-            Customer customer = new Customer(name, address);
-            if(CustomerDAO.addNewCustomer(customer) == true) {
+            Address address = new Address(address1, address2, city, postalCode, phone);
+            /* check if there is a customer value in the getCustomertoSave variable.
+            If so, use the constructor that sets customerId and update the existing user
+            rather than saving a new one. save a boolean value into the variable savesuccessfull
+             to determine what message to show to the user.
+             */
+            boolean savesuccesfull;
+            if (DataStorage.getCustomerToSave() != null){
+                int customerId = DataStorage.getCustomerToSave().getCustomerID();
+                Customer customer = new Customer(customerId, name, address);
+                savesuccesfull = CustomerDAO.updateCustomer(customer);
+            }
+            else {
+                Customer customer = new Customer(name, address);
+                savesuccesfull = CustomerDAO.addNewCustomer(customer);
+            }
+
+            if(savesuccesfull == true) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Customer Saved");
                 alert.setContentText("Customer Successfully saved.");
@@ -89,6 +104,8 @@ public class AddEditCustomerController implements Initializable {
                 alert.setTitle("Save failed");
                 alert.setContentText("Customer not saved.");
             }
+            //clear the customer variable saved in storage
+            DataStorage.clearCustomerToSave();
         }
         catch(NumberFormatException | IOException e)
         {
@@ -105,8 +122,21 @@ public class AddEditCustomerController implements Initializable {
 
     }
 
+    public void receiveCustomer(Customer customer)
+    {
+        DataStorage.setCustomerToSave(customer);
+        nameTextBox.setText(customer.getCustomerName());
+        phoneTextField.setText(customer.getAddress().getPhone());
+        address1TextField.setText(customer.getAddress().getAddressLine1());
+        address2TextField.setText(customer.getAddress().getAddressLine2());
+        cityComboBox.setItems(DataStorage.getAllCities());
+        cityComboBox.getSelectionModel().select(customer.getAddress().getCity());
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         cityComboBox.getItems().addAll(DataStorage.getAllCities());
     }
 }
