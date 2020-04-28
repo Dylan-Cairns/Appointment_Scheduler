@@ -10,6 +10,7 @@ public class DataStorage {
     private static ObservableList<Country> countryList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
     private static Customer customerToSave = null;
+    private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
         return userList;
@@ -23,6 +24,10 @@ public class DataStorage {
 
     public static ObservableList<Country> getAllCountries() {
         return countryList;
+    }
+
+    public static ObservableList<Appointment> getAllAppointments() {
+        return apptList;
     }
 
     public static void addUser(User user) {
@@ -39,6 +44,10 @@ public class DataStorage {
 
     public static void addCountry(Country country) {
         countryList.add(country);
+    }
+
+    public static void addAppointment(Appointment appointment) {
+        apptList.add(appointment);
     }
 
     public static User lookupUser(int userID) {
