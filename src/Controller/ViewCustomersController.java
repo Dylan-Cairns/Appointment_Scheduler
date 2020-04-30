@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.AppointmentDAO;
 import DAO.CustomerDAO;
 import Model.Customer;
 import Model.DataStorage;
@@ -66,20 +67,36 @@ public class ViewCustomersController implements Initializable {
 
     @FXML
     void onActionDeleteCustomer(ActionEvent event) {
+        //make sure a customer is selected
         if(ViewCustTableview.getSelectionModel().getSelectedItem() != null)
         {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setContentText("Delete customer?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK)
-            {
-                CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
-                CustomerDAO.getAllCustomers();
-                ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
+            //check if customer has a pending appointment in the database.
+            int customerId = ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID();
+            AppointmentDAO.getAllAppointments();
+            if(!DataStorage.lookupCustAppointments(customerId).isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setContentText("This customer has a pending appointment. Customers" +
+                        "with pending appointments cannot be deleted.");
+                alert.showAndWait();
             }
+            // customer has no pending appointments. show standard confirmation dialog
+            else {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setContentText("Delete customer?");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK)
+                {
+                    CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
+                    CustomerDAO.getAllCustomers();
+                    ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
+                }
+            }
+
         }
+        //no customer was selected:
         else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);

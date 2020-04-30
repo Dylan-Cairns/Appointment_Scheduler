@@ -1,19 +1,22 @@
 package Controller;
 
+import DAO.AppointmentDAO;
+import DAO.CustomerDAO;
+import Model.Appointment;
+import Model.DataStorage;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ViewAppointmentsController implements Initializable {
@@ -39,19 +42,16 @@ public class ViewAppointmentsController implements Initializable {
     private Button addApptButton;
 
     @FXML
-    private TableView<?> ViewCustTableview;
+    private TableView<Appointment> ViewApptTableview;
 
     @FXML
-    private TableColumn<?, ?> ViewApptTableviewNameCol;
+    private TableColumn<Appointment, String> ViewApptTableviewNameCol;
 
     @FXML
-    private TableColumn<?, ?> ViewApptTableviewDateCol;
+    private TableColumn<Appointment, String> ViewApptTableviewDateTimeCol;
 
     @FXML
-    private TableColumn<?, ?> ViewApptTableviewTimeCol;
-
-    @FXML
-    private TableColumn<?, ?> ViewApptTableviewTypeCol;
+    private TableColumn<Appointment, String> ViewApptTableviewTypeCol;
 
     @FXML
     private Button backToMenuButton;
@@ -72,11 +72,31 @@ public class ViewAppointmentsController implements Initializable {
 
     @FXML
     void onActionDeleteAppt(ActionEvent event) {
+        if(ViewApptTableview.getSelectionModel().getSelectedItem() != null)
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setContentText("Delete Appointment?");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK)
+            {
+                AppointmentDAO.deleteAppointment(ViewApptTableview.getSelectionModel().getSelectedItem().getAppointmentId());
+                AppointmentDAO.getAllAppointments();
+                ViewApptTableview.setItems(Model.DataStorage.getAllAppointments());
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please select an appointment to delete.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    void onActionRadioBttn(ActionEvent event) {
+    void onActionViewWeek(ActionEvent event) {
 
     }
 
@@ -97,6 +117,15 @@ public class ViewAppointmentsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        AppointmentDAO.getAllAppointments();
+        ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
+
+        ViewApptTableviewNameCol.setCellValueFactory(cellData -> {
+            return new ReadOnlyStringWrapper(cellData.getValue().getCustomer().getCustomerName());});
+        ViewApptTableviewDateTimeCol.setCellValueFactory(cellData -> {
+            return new ReadOnlyStringWrapper(cellData.getValue().getStartTime().toString());});
+        ViewApptTableviewTypeCol.setCellValueFactory(cellData -> {
+            return new ReadOnlyStringWrapper(cellData.getValue().getApptType());});
 
     }
 }

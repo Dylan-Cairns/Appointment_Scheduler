@@ -28,7 +28,6 @@ public class Main extends Application {
 
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
-        CustomerDAO.getAllCustomers();
 
         //launch GUI
         launch(args);

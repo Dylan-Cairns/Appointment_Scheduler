@@ -6,11 +6,9 @@ import Model.Customer;
 import Model.DataStorage;
 import Utils.DBConnection;
 import Utils.DBQuery;
+import Utils.TimeFunctions;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -39,11 +37,8 @@ public class AppointmentDAO {
                 String apptType=rs.getString("type");
 
                 //convert date string to LocalDateTime object for start and end time
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss.S");
-                String txtStartTime = rs.getString("start");
-                LocalDateTime startTime = LocalDateTime.parse(txtStartTime, df);
-                String txtEndTime = rs.getString("end");
-                LocalDateTime endTime = LocalDateTime.parse(txtStartTime, df);
+                LocalDateTime startTime = TimeFunctions.DBTimeToLocalTime(rs.getTimestamp("start"));
+                LocalDateTime endTime = TimeFunctions.DBTimeToLocalTime(rs.getTimestamp("end"));
 
                 Appointment returnedAppointment = new Appointment(appointmentId, customer, userId, apptType, startTime, endTime);
                 rs.close();
@@ -86,5 +81,72 @@ public class AppointmentDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static boolean addNewAppointment(Appointment appointment) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String insertStatement = "INSERT INTO appointment (customerId, userId, title, description, " +
+                    "location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, insertStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+
+            ps.setInt(1, appointment.getCustomer().getCustomerID());
+            ps.setInt(2, appointment.getUserId());
+            ps.setString(3, "na");
+            ps.setString(4, "na");
+            ps.setString(5, "na");
+            ps.setString(6, "na");
+            ps.setString(7, appointment.getApptType());
+            ps.setString(8, "na");
+            //fix time functions here
+            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(5, "na");
+            ps.setString(6, LocalDateTime.now().toString());
+            ps.setString(7, "na");
+            //Save results into result set
+            //Check save was successful
+            int res = ps.executeUpdate();
+
+            if (res == 1) {//one row was affected; namely the one that was inserted!
+                System.out.println("Customer added!");
+                return true;
+            } else {
+                System.out.println("Customer not added");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean deleteAppointment(int appointmentId) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "DELETE FROM U06NwI.appointment WHERE appointmentId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Set value cityName to be passed to function in select statement
+            ps.setInt(1, appointmentId);
+            int res = ps.executeUpdate();
+            if (res == 1) {//one row was affected; namely the one that was deleted!
+                System.out.println("Appointment deleted");
+                return true;
+            } else {
+                System.out.println("Appointment not deleted");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

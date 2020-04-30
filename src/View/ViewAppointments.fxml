@@ -27,7 +27,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionRadioBttn" prefWidth="90.0" text="Week">
+                        <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionViewWeek" prefWidth="90.0" text="Week">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
@@ -61,12 +61,11 @@
                   <Insets bottom="15.0" top="30.0" />
                </padding>
             </HBox>
-            <TableView fx:id="ViewCustTableview" prefHeight="489.0" prefWidth="740.0">
+            <TableView fx:id="ViewApptTableview" prefHeight="489.0" prefWidth="740.0">
               <columns>
-                 <TableColumn fx:id="ViewApptTableviewNameCol" prefWidth="300.0" text="Name" />
-                 <TableColumn fx:id="ViewApptTableviewDateCol" prefWidth="200.0" text="Date" />
-                 <TableColumn fx:id="ViewApptTableviewTimeCol" text="Time" />
-                 <TableColumn fx:id="ViewApptTableviewTypeCol" prefWidth="160.0" text="Appt Type" />
+                 <TableColumn fx:id="ViewApptTableviewNameCol" prefWidth="300.0" text="Customer Name" />
+                 <TableColumn fx:id="ViewApptTableviewDateTimeCol" prefWidth="220.0" text="Date and Time" />
+                 <TableColumn fx:id="ViewApptTableviewTypeCol" prefWidth="220.0" text="Appt Type" />
               </columns>
                <VBox.margin>
                   <Insets left="30.0" right="30.0" top="15.0" />

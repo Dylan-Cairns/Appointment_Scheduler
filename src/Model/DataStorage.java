@@ -1,5 +1,6 @@
 package Model;
 
+import DAO.AppointmentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -94,10 +95,20 @@ public class DataStorage {
         return -1;
     }
 
+    public static ObservableList<Appointment> lookupCustAppointments(int customerId) {
+        ObservableList<Appointment> custAppts = FXCollections.observableArrayList();
+        for (Appointment appointment: getAllAppointments()) {
+            if (appointment.getCustomer().getCustomerID() == customerId)
+                custAppts.add(appointment);
+        }
+        return custAppts;
+    }
+
     public static void emptyStoredData() {
         customerList.clear();
         cityList.clear();
         countryList.clear();
+        apptList.clear();
     }
 
     public static Customer getCustomerToSave() {

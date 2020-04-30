@@ -34,8 +34,12 @@ public class MainMenuController {
     }
 
     @FXML
-    void onActionViewAppointments(ActionEvent event) {
-
+    void onActionViewAppointments(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
+        stage.setTitle("View Appointments");
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @FXML

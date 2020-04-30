@@ -69,7 +69,7 @@ public class AddressDAO {
             ps.setString(5, address.getPhone());
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
             ps.setString(7, "test");
-            ps.setString(8, LocalDateTime.now().toString());
+            ps.setTimestamp(8,  Timestamp.valueOf(LocalDateTime.now()));
             ps.setString(9, "test");
             //Check save was successful
             int res = ps.executeUpdate();
