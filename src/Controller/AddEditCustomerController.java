@@ -57,7 +57,7 @@ public class AddEditCustomerController implements Initializable {
         if (result.get() == ButtonType.OK)
         {
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/View/ViewCustomers.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
         }
@@ -94,7 +94,7 @@ public class AddEditCustomerController implements Initializable {
                 alert.setTitle("Customer Saved");
                 alert.setContentText("Customer Successfully saved.");
                 stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
+                scene = FXMLLoader.load(getClass().getResource("/View/ViewCustomers.fxml"));
                 stage.setTitle("View customers");
                 stage.setScene(new Scene(scene));
                 stage.show();

@@ -59,7 +59,7 @@ public class ViewCustomersController implements Initializable {
     @FXML
     void onActionAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/AddEditCustomer.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/AddEditCustomer.fxml"));
         stage.setTitle("View customers");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -118,7 +118,7 @@ public class ViewCustomersController implements Initializable {
             Stage stage;
             Parent root;
             stage=(Stage) viewCustomerButton.getScene().getWindow();
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/AddEditCustomer.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/View/AddEditCustomer.fxml"));
             root =loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -138,7 +138,7 @@ public class ViewCustomersController implements Initializable {
     @FXML
     void onActionBackToMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
         stage.setTitle("Appointment Scheduler");
         stage.setScene(new Scene(scene));
         stage.show();

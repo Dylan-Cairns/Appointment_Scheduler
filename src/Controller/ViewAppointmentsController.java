@@ -64,7 +64,7 @@ public class ViewAppointmentsController implements Initializable {
     @FXML
     void onActionBackToMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
         stage.setTitle("Appointment Scheduler");
         stage.setScene(new Scene(scene));
         stage.show();

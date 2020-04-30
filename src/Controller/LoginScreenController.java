@@ -43,7 +43,7 @@ public class LoginScreenController {
         String password = passwordField.getText();
         if(CheckUserPassword.checkPassword(userName, password) == true) {
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
             stage.setTitle("Appointment Scheduler");
             stage.setScene(new Scene(scene));
             stage.show();
