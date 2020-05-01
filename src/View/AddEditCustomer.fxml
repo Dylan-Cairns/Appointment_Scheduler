@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddEditCustomerController">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddEditCustomerController">
    <children>
       <VBox prefHeight="480.0" prefWidth="640.0">
          <children>
             <HBox alignment="CENTER_RIGHT" minHeight="50.0" prefHeight="50.0">
-               <children>
-                  <Button fx:id="viewAppointmentsButton" mnemonicParsing="false" onAction="#onActionViewAppointments" text="View Appointments" />
-               </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

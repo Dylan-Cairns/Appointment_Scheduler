@@ -1,9 +1,6 @@
 package DAO;
 
-import Model.Address;
-import Model.Appointment;
-import Model.Customer;
-import Model.DataStorage;
+import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
 import Utils.TimeFunctions;
@@ -148,5 +145,30 @@ public class AppointmentDAO {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    public static void getAllApptTypes() {
+        try {
+            //Clear local data before downloading new appt type list
+            DataStorage.emptyStoredData();
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT type FROM U06NwI.appointment";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Saver results into result set
+            ResultSet rs = ps.executeQuery();
+            //Create user objects from results, save in an observable list
+            while (rs.next()) {
+                String apptType = rs.getString("type");
+                DataStorage.addApptType(apptType);
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

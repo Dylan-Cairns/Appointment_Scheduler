@@ -8,10 +8,10 @@ public class DataStorage {
     private static ObservableList<User> userList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
     private static ObservableList<City> cityList = FXCollections.observableArrayList();
-    private static ObservableList<Country> countryList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
     private static Customer customerToSave = null;
     private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+    private static ObservableList<String> apptTypeList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
         return userList;
@@ -23,13 +23,11 @@ public class DataStorage {
 
     public static ObservableList<City> getAllCities() { return cityList; }
 
-    public static ObservableList<Country> getAllCountries() {
-        return countryList;
-    }
-
     public static ObservableList<Appointment> getAllAppointments() {
         return apptList;
     }
+
+    public static ObservableList<String> getAllApptTypes() { return apptTypeList; }
 
     public static void addUser(User user) {
         userList.add(user);
@@ -43,13 +41,11 @@ public class DataStorage {
         cityList.add(city);
     }
 
-    public static void addCountry(Country country) {
-        countryList.add(country);
-    }
-
     public static void addAppointment(Appointment appointment) {
         apptList.add(appointment);
     }
+
+    public static void addApptType(String apptType) { apptTypeList.add(apptType);}
 
     public static User lookupUser(int userID) {
         for (User user : getAllUsers()) {
@@ -107,8 +103,8 @@ public class DataStorage {
     public static void emptyStoredData() {
         customerList.clear();
         cityList.clear();
-        countryList.clear();
         apptList.clear();
+        apptTypeList.clear();
     }
 
     public static Customer getCustomerToSave() {

@@ -2,6 +2,8 @@ package DAO;
 
 import Model.City;
 import Model.Country;
+import Model.Customer;
+import Model.DataStorage;
 import Utils.DBConnection;
 import Utils.DBQuery;
 
@@ -79,5 +81,34 @@ public class CityDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public static void getAllCities() {
+        try {
+            //Clear local data before downloading new cities list.
+            DataStorage.emptyStoredData();
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT cityId FROM U06NwI.city";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Saver results into result set
+            ResultSet rs = ps.executeQuery();
+            //Create user objects from results, save in an observable list
+            while (rs.next()) {
+                int cityId=rs.getInt("cityId");
+                City city = getCityByID(cityId);
+                if(city != null) {
+                    //add city to cities list
+                    DataStorage.addCity(city);
+                }
+            }
+            rs.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

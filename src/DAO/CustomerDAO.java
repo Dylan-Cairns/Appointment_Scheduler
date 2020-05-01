@@ -64,9 +64,6 @@ public class CustomerDAO {
                 if(customer != null) {
                     //add customer to customer list
                     DataStorage.addCustomer(customer);
-                    //store city and country in lists, which are used to populate comboboxes for edit customer screen
-                    DataStorage.addCity(customer.getAddress().getCity());
-                    DataStorage.addCountry(customer.getAddress().getCity().getCountry());
                 }
             }
             rs.close();

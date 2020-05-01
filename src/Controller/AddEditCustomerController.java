@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.CityDAO;
 import DAO.CustomerDAO;
 import Model.*;
 import javafx.event.ActionEvent;
@@ -20,9 +21,6 @@ public class AddEditCustomerController implements Initializable {
 
     Stage stage;
     Parent scene;
-
-    @FXML
-    private Button viewAppointmentsButton;
 
     @FXML
     private TextField nameTextBox;
@@ -52,7 +50,7 @@ public class AddEditCustomerController implements Initializable {
     void onActionCancel(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // confirm before returning to main menu
         alert.setTitle("Confirmation Dialog");
-        alert.setContentText("Forget changes");
+        alert.setContentText("Forget changes?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
@@ -117,11 +115,6 @@ public class AddEditCustomerController implements Initializable {
 
     }
 
-    @FXML
-    void onActionViewAppointments(ActionEvent event) {
-
-    }
-
     public void receiveCustomer(Customer customer)
     {
         DataStorage.setCustomerToSave(customer);
@@ -136,7 +129,7 @@ public class AddEditCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        CityDAO.getAllCities();
         cityComboBox.getItems().addAll(DataStorage.getAllCities());
     }
 }
