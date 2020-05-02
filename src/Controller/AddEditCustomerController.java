@@ -129,7 +129,6 @@ public class AddEditCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        CityDAO.getAllCities();
         cityComboBox.getItems().addAll(DataStorage.getAllCities());
     }
 }

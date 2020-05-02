@@ -1,6 +1,8 @@
 package Model;
 
 import DAO.AppointmentDAO;
+import DAO.CityDAO;
+import DAO.CustomerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -18,16 +20,24 @@ public class DataStorage {
     }
 
     public static ObservableList<Customer> getAllCustomers() {
+        CustomerDAO.getAllCustomers();
         return customerList;
     }
 
-    public static ObservableList<City> getAllCities() { return cityList; }
+    public static ObservableList<City> getAllCities() {
+        CityDAO.getAllCities();
+        return cityList;
+    }
 
     public static ObservableList<Appointment> getAllAppointments() {
+        AppointmentDAO.getAllAppointments();
         return apptList;
     }
 
-    public static ObservableList<String> getAllApptTypes() { return apptTypeList; }
+    public static ObservableList<String> getAllApptTypes() {
+        AppointmentDAO.getAllApptTypes();
+        return apptTypeList;
+    }
 
     public static void addUser(User user) {
         userList.add(user);

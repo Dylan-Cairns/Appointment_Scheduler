@@ -72,7 +72,6 @@ public class ViewCustomersController implements Initializable {
         {
             //check if customer has a pending appointment in the database.
             int customerId = ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID();
-            AppointmentDAO.getAllAppointments();
             if(!DataStorage.lookupCustAppointments(customerId).isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
@@ -163,7 +162,6 @@ public class ViewCustomersController implements Initializable {
             return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone());
         });
 
-        CustomerDAO.getAllCustomers();
         ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
     }
 }
