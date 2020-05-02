@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class TimeFunctions {
@@ -35,25 +32,24 @@ public class TimeFunctions {
         return DBtime;
     }
 
-    public static ObservableList<LocalDateTime> getTimeslots(LocalDate selectedDate) {
-        ObservableList<LocalDateTime> availableTimeSlots = FXCollections.observableArrayList();
+    public static ObservableList<LocalTime> getTimeslots(LocalDate selectedDate) {
+        ObservableList<LocalTime> availableTimeSlots = FXCollections.observableArrayList();
         ObservableList<LocalDateTime> nineToFiveSchedule = generate9to5Schedule(selectedDate);
         ObservableList<Appointment> existingAppts = DataStorage.getAllAppointments();
 
         for(LocalDateTime timeSlot: nineToFiveSchedule) {
             for(Appointment appt: existingAppts) {
                 if(timeSlot == appt.getStartTime()){
-                    availableTimeSlots.remove(timeSlot);
+                    nineToFiveSchedule.remove(timeSlot);
                 }
-                else if(timeSlot.isAfter(appt.getStartTime()) && timeSlot.isBefore(appt.getEndTime())) {
-                    availableTimeSlots.remove(timeSlot);
-                }
-                else {
-                    availableTimeSlots.add(timeSlot);
+                if(timeSlot.isAfter(appt.getStartTime()) && timeSlot.isBefore(appt.getEndTime())) {
+                    nineToFiveSchedule.remove(timeSlot);
                 }
             }
         }
-
+        for(LocalDateTime ldt: nineToFiveSchedule) {
+            availableTimeSlots.add(LocalTime.from(ldt));
+        }
         return availableTimeSlots;
     }
 

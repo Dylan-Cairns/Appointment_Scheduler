@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static Model.DataStorage.getAllCustomers;
 
@@ -30,7 +31,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        for(LocalDateTime ldt: TimeFunctions.getTimeslots(LocalDate.now())){
+        for(LocalTime ldt: TimeFunctions.getTimeslots(LocalDate.now())){
             System.out.println(ldt);
         }
 
