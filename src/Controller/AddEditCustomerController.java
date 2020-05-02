@@ -1,6 +1,5 @@
 package Controller;
 
-import DAO.CityDAO;
 import DAO.CustomerDAO;
 import Model.*;
 import javafx.event.ActionEvent;
@@ -77,8 +76,8 @@ public class AddEditCustomerController implements Initializable {
              to determine what message to show to the user.
              */
             boolean savesuccesfull;
-            if (DataStorage.getCustomerToSave() != null){
-                int customerId = DataStorage.getCustomerToSave().getCustomerID();
+            if (DataStorage.getStoredCustomer() != null){
+                int customerId = DataStorage.getStoredCustomer().getCustomerID();
                 Customer customer = new Customer(customerId, name, address);
                 savesuccesfull = CustomerDAO.updateCustomer(customer);
             }
@@ -103,7 +102,7 @@ public class AddEditCustomerController implements Initializable {
                 alert.setContentText("Customer not saved.");
             }
             //clear the customer variable saved in storage
-            DataStorage.clearCustomerToSave();
+            DataStorage.clearStoredCustomer();
         }
         catch(NumberFormatException | IOException e)
         {
@@ -117,7 +116,7 @@ public class AddEditCustomerController implements Initializable {
 
     public void receiveCustomer(Customer customer)
     {
-        DataStorage.setCustomerToSave(customer);
+        DataStorage.setStoredCustomer(customer);
         nameTextBox.setText(customer.getCustomerName());
         phoneTextField.setText(customer.getAddress().getPhone());
         address1TextField.setText(customer.getAddress().getAddressLine1());

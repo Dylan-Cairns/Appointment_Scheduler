@@ -3,6 +3,7 @@ package Controller;
 import DAO.AppointmentDAO;
 import DAO.CustomerDAO;
 import Model.Appointment;
+import Model.Customer;
 import Model.DataStorage;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
@@ -110,8 +111,27 @@ public class ViewAppointmentsController implements Initializable {
     }
 
     @FXML
-    void onActionViewCustomeAppt(ActionEvent event) {
-
+    void onActionEditAppt(ActionEvent event) throws IOException {
+        if (ViewApptTableview.getSelectionModel().getSelectedItem() != null)
+        {
+            Stage stage;
+            Parent root;
+            stage=(Stage) viewApptButton.getScene().getWindow();
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/View/AddEditAppointment.fxml"));
+            root =loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            AddEditAppointmentController AEAController = loader.getController();
+            AEAController.receiveAppointment(ViewApptTableview.getSelectionModel().getSelectedItem());
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please select a customer to edit.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

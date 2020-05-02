@@ -4,7 +4,6 @@ import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -130,7 +129,7 @@ public class CustomerDAO {
             ps.setString(5, "test");
             ps.setString(6, LocalDateTime.now().toString());
             ps.setString(7, "test");
-            ps.setInt(8, DataStorage.getCustomerToSave().getCustomerID());
+            ps.setInt(8, DataStorage.getStoredCustomer().getCustomerID());
             //Saver results into result set
             //Check save was successful
             int res = ps.executeUpdate();

@@ -1,16 +1,15 @@
 package Controller;
 
-import DAO.AppointmentDAO;
-import DAO.CustomerDAO;
+import Model.Appointment;
 import Model.Customer;
 import Model.DataStorage;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
@@ -44,8 +43,28 @@ public class ChooseCustomerController implements Initializable {
 
 
     @FXML
-    void onActionContinue(ActionEvent event) {
-
+    void onActionContinue(ActionEvent event) throws IOException {
+        if(customerNameComboBox.getSelectionModel().getSelectedItem() != null) {
+            Stage stage;
+            Parent root;
+            stage=(Stage) customerNameComboBox.getScene().getWindow();
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/View/AddEditAppointment.fxml"));
+            root =loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            AddEditAppointmentController AEAController = loader.getController();
+            Customer tempCustomer = customerNameComboBox.getSelectionModel().getSelectedItem();
+            Appointment tempAppointment = new Appointment(tempCustomer);
+            AEAController.receiveAppointment(tempAppointment);
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please select a customer.");
+            alert.showAndWait();
+        }
     }
 
     @Override

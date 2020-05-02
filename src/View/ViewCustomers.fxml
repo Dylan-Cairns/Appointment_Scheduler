@@ -31,7 +31,7 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
                      <children>
-                        <Button fx:id="viewCustomerButton" mnemonicParsing="false" onAction="#onActionViewCustomer" prefWidth="80.0" text="View/Edit">
+                        <Button fx:id="viewCustomerButton" mnemonicParsing="false" onAction="#onActionEditCustomer" prefWidth="80.0" text="View/Edit">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>

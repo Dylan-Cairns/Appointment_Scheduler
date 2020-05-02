@@ -1,9 +1,16 @@
 package Utils;
 
+import Model.Appointment;
+import Model.DataStorage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TimeFunctions {
 
@@ -26,5 +33,45 @@ public class TimeFunctions {
         LocalDateTime ldtTime = utcTime.toLocalDateTime();
         Timestamp DBtime = Timestamp.valueOf(ldtTime);
         return DBtime;
+    }
+
+    public static ObservableList<LocalDateTime> getTimeslots(LocalDate selectedDate) {
+        ObservableList<LocalDateTime> availableTimeSlots = FXCollections.observableArrayList();
+        ObservableList<LocalDateTime> nineToFiveSchedule = generate9to5Schedule(selectedDate);
+        ObservableList<Appointment> existingAppts = DataStorage.getAllAppointments();
+
+        for(LocalDateTime timeSlot: nineToFiveSchedule) {
+            for(Appointment appt: existingAppts) {
+                if(timeSlot == appt.getStartTime()){
+                    availableTimeSlots.remove(timeSlot);
+                }
+                else if(timeSlot.isAfter(appt.getStartTime()) && timeSlot.isBefore(appt.getEndTime())) {
+                    availableTimeSlots.remove(timeSlot);
+                }
+                else {
+                    availableTimeSlots.add(timeSlot);
+                }
+            }
+        }
+
+        return availableTimeSlots;
+    }
+
+    private static ObservableList<LocalDateTime> generate9to5Schedule(LocalDate selectedDate) {
+        ObservableList<LocalDateTime> nineToFiveSchedule = FXCollections.observableArrayList();
+        ObservableList<String> hourPeriods = FXCollections.observableArrayList();
+        hourPeriods.addAll("09", "10", "11", "12", "13", "14", "15", "16");
+        ObservableList<String> quarterHourPeriods = FXCollections.observableArrayList();
+        quarterHourPeriods.addAll("00", "15", "30", "45");
+        for (String hourPeriod : hourPeriods) {
+            for (String quarterHourPeriod : quarterHourPeriods) {
+                String timeBlockString = (selectedDate.toString() + " " + hourPeriod
+                        + ":" + quarterHourPeriod + ":00.0");
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss.S");
+                LocalDateTime timeBlock = LocalDateTime.parse(timeBlockString, df);
+                nineToFiveSchedule.add(timeBlock);
+            }
+        }
+        return nineToFiveSchedule;
     }
 }

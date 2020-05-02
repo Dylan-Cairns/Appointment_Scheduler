@@ -3,6 +3,7 @@ package Software2;
 import DAO.*;
 import Model.*;
 import Utils.DBConnection;
+import Utils.TimeFunctions;
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -10,6 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static Model.DataStorage.getAllCustomers;
 
@@ -25,6 +30,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        for(LocalDateTime ldt: TimeFunctions.getTimeslots(LocalDate.now())){
+            System.out.println(ldt);
+        }
 
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();

@@ -33,12 +33,9 @@
                </padding>
                <children>
                   <ComboBox fx:id="customerNameComboBox" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="300.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" top="10.0" />
-                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                     </HBox.margin>
                   </ComboBox>
                </children>
             </HBox>

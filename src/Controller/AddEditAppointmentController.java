@@ -1,6 +1,5 @@
 package Controller;
 
-import DAO.AppointmentDAO;
 import Model.Appointment;
 import Model.DataStorage;
 import javafx.event.ActionEvent;
@@ -62,7 +61,7 @@ public class AddEditAppointmentController implements Initializable {
 
     @FXML
     void onActionSelectDate(ActionEvent event) {
-
+        System.out.println(datePickerBox.getValue());
     }
 
     @FXML
@@ -75,14 +74,14 @@ public class AddEditAppointmentController implements Initializable {
 
     }
 
-    public void ReceiveAppointment(Appointment appointment) {
-
+    public void receiveAppointment(Appointment appointment) {
+        DataStorage.setStoredAppointment(appointment);
+        nameTextBox.setText(appointment.getCustomer().getCustomerName());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        AppointmentDAO.getAllApptTypes();
         ApptTypeComboBox.getItems().addAll(DataStorage.getAllApptTypes());
 
     }

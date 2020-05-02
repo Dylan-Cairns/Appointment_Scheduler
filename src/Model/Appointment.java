@@ -29,6 +29,10 @@ public class Appointment {
         this.endTime = endTime;
     }
 
+    public Appointment(Customer customer) {
+        this.customer = customer;
+    }
+
     public int getAppointmentId() {
         return appointmentId;
     }

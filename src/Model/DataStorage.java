@@ -11,7 +11,8 @@ public class DataStorage {
     private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
     private static ObservableList<City> cityList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
-    private static Customer customerToSave = null;
+    private static Customer storedCustomer = null;
+    private static Appointment storedAppointment = null;
     private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
     private static ObservableList<String> apptTypeList = FXCollections.observableArrayList();
 
@@ -117,15 +118,27 @@ public class DataStorage {
         apptTypeList.clear();
     }
 
-    public static Customer getCustomerToSave() {
-        return customerToSave;
+    public static Customer getStoredCustomer() {
+        return storedCustomer;
     }
 
-    public static void setCustomerToSave(Customer customerToSave) {
-        DataStorage.customerToSave = customerToSave;
+    public static void setStoredCustomer(Customer storedCustomer) {
+        DataStorage.storedCustomer = storedCustomer;
     }
 
-    public static void clearCustomerToSave() {
-        DataStorage.customerToSave = null;
+    public static void clearStoredCustomer() {
+        DataStorage.storedCustomer = null;
+    }
+
+    public static Appointment getStoredAppointment() {
+        return storedAppointment;
+    }
+
+    public static void setStoredAppointment(Appointment storedAppointment) {
+        DataStorage.storedAppointment = storedAppointment;
+    }
+
+    public static void clearStoredAppointment() {
+        DataStorage.storedAppointment = null;
     }
 }

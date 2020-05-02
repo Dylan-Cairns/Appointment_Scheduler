@@ -111,7 +111,7 @@ public class ViewCustomersController implements Initializable {
     }
 
     @FXML
-    void onActionViewCustomer(ActionEvent event) throws IOException {
+    void onActionEditCustomer(ActionEvent event) throws IOException {
         if (ViewCustTableview.getSelectionModel().getSelectedItem() != null)
         {
             Stage stage;
