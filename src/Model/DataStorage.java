@@ -21,7 +21,7 @@ public class DataStorage {
     }
 
     public static ObservableList<Customer> getAllCustomers() {
-        if(DataStorage.getAllCustomers() == null) {
+        if(customerList.isEmpty()) {
             CustomerDAO.getAllCustomers();
         }
         return customerList;
@@ -33,7 +33,7 @@ public class DataStorage {
     }
 
     public static ObservableList<Appointment> getAllAppointments() {
-        if(DataStorage.getAllAppointments() == null) {
+        if(apptList.isEmpty()) {
             AppointmentDAO.getAllAppointments();
         }
         return apptList;

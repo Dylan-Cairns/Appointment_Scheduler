@@ -141,7 +141,6 @@ public class ViewAppointmentsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        AppointmentDAO.getAllAppointments();
         ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
 
         ViewApptTableviewNameCol.setCellValueFactory(cellData -> {
