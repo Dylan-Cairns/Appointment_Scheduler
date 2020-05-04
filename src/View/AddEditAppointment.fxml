@@ -58,12 +58,32 @@
                      <children>
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <Label minWidth="150.0" prefHeight="0.0" prefWidth="150.0" text="Time">
+                              <Label minWidth="150.0" prefHeight="0.0" prefWidth="150.0" text="Start Time">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="timeComboBox" minWidth="250.0" onAction="#onActionTimeComboBox" prefHeight="30.0" prefWidth="250.0" />
+                              <ComboBox fx:id="startTimeComboBox" minWidth="250.0" onAction="#onActionStartTimeComboBox" prefHeight="30.0" prefWidth="250.0">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </HBox.margin></ComboBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT">
+                           <children>
+                              <Label minWidth="150.0" prefHeight="0.0" prefWidth="150.0" text="Appointment Length">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox fx:id="apptLengthComboBox" minWidth="250.0" onAction="#onActionApptLengthComboBox" prefHeight="30.0" prefWidth="250.0">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </HBox.margin></ComboBox>
                            </children>
                         </HBox>
                      </children>
@@ -75,7 +95,7 @@
                                         <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                                     </HBox.margin>
                                 </Label>
-                        <ComboBox fx:id="ApptTypeComboBox" minWidth="250.0" onAction="#selectApptType" prefHeight="30.0" prefWidth="250.0">
+                        <ComboBox fx:id="apptTypeComboBox" minWidth="250.0" onAction="#selectApptType" prefHeight="30.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </HBox.margin>

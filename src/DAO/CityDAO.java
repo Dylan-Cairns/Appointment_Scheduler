@@ -86,7 +86,7 @@ public class CityDAO {
     public static void getAllCities() {
         try {
             //Clear local data before downloading new cities list.
-            DataStorage.emptyStoredData();
+            DataStorage.clearCityList();
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement

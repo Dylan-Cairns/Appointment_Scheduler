@@ -21,7 +21,9 @@ public class DataStorage {
     }
 
     public static ObservableList<Customer> getAllCustomers() {
-        CustomerDAO.getAllCustomers();
+        if(DataStorage.getAllCustomers() == null) {
+            CustomerDAO.getAllCustomers();
+        }
         return customerList;
     }
 
@@ -31,7 +33,9 @@ public class DataStorage {
     }
 
     public static ObservableList<Appointment> getAllAppointments() {
-        AppointmentDAO.getAllAppointments();
+        if(DataStorage.getAllAppointments() == null) {
+            AppointmentDAO.getAllAppointments();
+        }
         return apptList;
     }
 
@@ -111,12 +115,22 @@ public class DataStorage {
         return custAppts;
     }
 
-    public static void emptyStoredData() {
+    public static void clearCustomerList() {
         customerList.clear();
-        cityList.clear();
+    }
+
+    public static void clearApptList() {
         apptList.clear();
+    }
+
+    public static void clearCityList() {
+        cityList.clear();
+    }
+
+    public static void clearApptTypeList() {
         apptTypeList.clear();
     }
+
 
     public static Customer getStoredCustomer() {
         return storedCustomer;

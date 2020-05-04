@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.CustomerDAO;
 import Model.Appointment;
 import Model.Customer;
 import Model.DataStorage;

@@ -5,6 +5,7 @@ import Model.DataStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.xml.crypto.Data;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -78,5 +79,27 @@ public class TimeFunctions {
         nineToFiveSchedule.remove(nineToFiveSchedule.size() -1);
         //return generated list
         return nineToFiveSchedule;
+    }
+
+    //using the new appointment start time as input, check what appt lengths are available
+    public static ObservableList<String> generateApptLengths(LocalDateTime apptStartTime) {
+        //create localdatetime objects of varying lengths
+        ObservableList<LocalDateTime> apptLengths = FXCollections.observableArrayList();
+        apptLengths.addAll(apptStartTime.plusMinutes(15),
+                apptStartTime.plusMinutes(30), apptStartTime.plusMinutes(45));
+        //check if they fall within the start and finish of existing appts. If so, remove from the list.
+        for(LocalDateTime newApptfinish: apptLengths) {
+            for(Appointment appt: DataStorage.getAllAppointments()) {
+                if(appt.getStartTime().isBefore(newApptfinish) && appt.getEndTime().isAfter(newApptfinish)) {
+                    apptLengths.remove(newApptfinish);
+                }
+            }
+        }
+        //convert the remaining LDT objects to strings formatted to displayed in the combobox
+        ObservableList<String> apptLengthStrings = FXCollections.observableArrayList();
+        for(LocalDateTime apptFinishLDT: apptLengths) {
+            String apptLengthString = ((Duration.between(apptStartTime, apptFinishLDT).toString().substring(2, 4)) + " minutes");
+        }
+        return apptLengthStrings;
     }
 }

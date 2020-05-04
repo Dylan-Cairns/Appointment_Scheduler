@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Appointment;
 import Model.DataStorage;
+import Utils.TimeFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -28,10 +32,13 @@ public class AddEditAppointmentController implements Initializable {
     private DatePicker datePickerBox;
 
     @FXML
-    private ComboBox<?> timeComboBox;
+    private ComboBox<LocalTime> startTimeComboBox;
 
     @FXML
-    private ComboBox<String> ApptTypeComboBox;
+    private ComboBox<String> apptTypeComboBox;
+
+    @FXML
+    private ComboBox<String> apptLengthComboBox;
 
     @FXML
     private Button saveButton;
@@ -61,11 +68,19 @@ public class AddEditAppointmentController implements Initializable {
 
     @FXML
     void onActionSelectDate(ActionEvent event) {
-        System.out.println(datePickerBox.getValue());
+        startTimeComboBox.getItems().addAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
     }
 
     @FXML
-    void onActionTimeComboBox(ActionEvent event) {
+    void onActionStartTimeComboBox(ActionEvent event) {
+        LocalDate ld = datePickerBox.getValue();
+        LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
+        LocalDateTime ldt = ld.atTime(lt);
+        apptLengthComboBox.getItems().addAll(Utils.TimeFunctions.generateApptLengths(ldt));
+    }
+
+    @FXML
+    void onActionApptLengthComboBox(ActionEvent event) {
 
     }
 
@@ -82,7 +97,7 @@ public class AddEditAppointmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ApptTypeComboBox.getItems().addAll(DataStorage.getAllApptTypes());
+        apptTypeComboBox.getItems().addAll(DataStorage.getAllApptTypes());
 
     }
 }

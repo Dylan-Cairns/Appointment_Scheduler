@@ -53,8 +53,8 @@ public class AppointmentDAO {
 
     public static void getAllAppointments() {
         try {
-            //Clear the old entries from the customer list before adding new entries from database
-            DataStorage.emptyStoredData();
+            //Clear the old entries from the appt list before adding new entries from database
+            DataStorage.clearApptList();
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement
@@ -150,7 +150,7 @@ public class AppointmentDAO {
     public static void getAllApptTypes() {
         try {
             //Clear local data before downloading new appt type list
-            DataStorage.emptyStoredData();
+            DataStorage.clearApptTypeList();
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement

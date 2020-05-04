@@ -45,7 +45,7 @@ public class CustomerDAO {
     public static void getAllCustomers() {
         try {
             //Clear the old entries from the customer list before adding new entries from database
-            DataStorage.emptyStoredData();
+            DataStorage.clearCustomerList();
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement

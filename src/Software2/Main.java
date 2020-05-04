@@ -31,10 +31,11 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        for(LocalTime ldt: TimeFunctions.getTimeslots(LocalDate.now())){
-            System.out.println(ldt);
-        }
 
+        LocalDateTime localdatetime = LocalDateTime.now();
+        for(String string: Utils.TimeFunctions.generateApptLengths(localdatetime)) {
+            System.out.println(string);
+        }
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
 
