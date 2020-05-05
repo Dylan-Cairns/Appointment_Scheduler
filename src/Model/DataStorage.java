@@ -16,7 +16,6 @@ public class DataStorage {
     private static Appointment storedAppointment = null;
     private static boolean customerAddressesDownloaded;
     private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
-    private static ObservableList<String> apptTypeList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
         return userList;
@@ -43,10 +42,6 @@ public class DataStorage {
         return apptList;
     }
 
-    public static ObservableList<String> getAllApptTypes() {
-        AppointmentDAO.getAllApptTypes();
-        return apptTypeList;
-    }
 
     public static void addUser(User user) {
         userList.add(user);
@@ -63,8 +58,6 @@ public class DataStorage {
     public static void addAppointment(Appointment appointment) {
         apptList.add(appointment);
     }
-
-    public static void addApptType(String apptType) { apptTypeList.add(apptType);}
 
     public static User getStoredUser() {
         return storedUser;
@@ -137,10 +130,6 @@ public class DataStorage {
 
     public static void clearCityList() {
         cityList.clear();
-    }
-
-    public static void clearApptTypeList() {
-        apptTypeList.clear();
     }
 
 

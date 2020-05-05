@@ -34,27 +34,29 @@ public class TimeFunctions {
     }
 
     public static ObservableList<LocalTime> getTimeslots(LocalDate selectedDate) {
-        ObservableList<LocalTime> availableTimeSlots = FXCollections.observableArrayList();
         ObservableList<LocalDateTime> nineToFiveSchedule = generate9to5Schedule(selectedDate);
         ObservableList<Appointment> existingAppts = DataStorage.getAllAppointments();
+        ObservableList<LocalDateTime> availableTimeSlots = FXCollections.observableArrayList();
+        availableTimeSlots.addAll(nineToFiveSchedule);
         //get a list of potential timeslots from the generate9to5Schedule fn.
         //check if each timeslot falls at the same time as the start of an existing appt, or during
         // and existing appt. If so, remove it from our results.
         for(LocalDateTime timeSlot: nineToFiveSchedule) {
             for(Appointment appt: existingAppts) {
-                if(timeSlot == appt.getStartTime()){
-                    nineToFiveSchedule.remove(timeSlot);
+                if(timeSlot.isEqual(appt.getStartTime())){
+                    availableTimeSlots.remove(timeSlot);
                 }
                 if(timeSlot.isAfter(appt.getStartTime()) && timeSlot.isBefore(appt.getEndTime())) {
-                    nineToFiveSchedule.remove(timeSlot);
+                    availableTimeSlots.remove(timeSlot);
                 }
             }
         }
         //strip the date from each timeslot to prepare it for use in the combobox.
-        for(LocalDateTime ldt: nineToFiveSchedule) {
-            availableTimeSlots.add(LocalTime.from(ldt));
+        ObservableList<LocalTime> availableTimeSlotsLocalTime = FXCollections.observableArrayList();
+        for(LocalDateTime ldt: availableTimeSlots) {
+            availableTimeSlotsLocalTime.add(LocalTime.from(ldt));
         }
-        return availableTimeSlots;
+        return availableTimeSlotsLocalTime;
     }
 
     private static ObservableList<LocalDateTime> generate9to5Schedule(LocalDate selectedDate) {
@@ -87,18 +89,22 @@ public class TimeFunctions {
         ObservableList<LocalDateTime> apptLengths = FXCollections.observableArrayList();
         apptLengths.addAll(apptStartTime.plusMinutes(15),
                 apptStartTime.plusMinutes(30), apptStartTime.plusMinutes(45));
-        //check if they fall within the start and finish of existing appts. If so, remove from the list.
-        for(LocalDateTime newApptfinish: apptLengths) {
-            for(Appointment appt: DataStorage.getAllAppointments()) {
-                if(appt.getStartTime().isBefore(newApptfinish) && appt.getEndTime().isAfter(newApptfinish)) {
-                    apptLengths.remove(newApptfinish);
+        //create a copy of the above list
+        ObservableList<LocalDateTime> availableApptLengths = FXCollections.observableArrayList();
+        availableApptLengths.addAll(apptLengths);
+        //check if they fall after the start of existing appts. If so, remove from the list.
+        for(LocalDateTime endTime: apptLengths) {
+            for(Appointment existingAppt: DataStorage.getAllAppointments()) {
+                if(apptStartTime.isBefore(existingAppt.getStartTime()) && existingAppt.getStartTime().isBefore(endTime)) {
+                    availableApptLengths.remove(endTime);
                 }
             }
         }
         //convert the remaining LDT objects to strings formatted to displayed in the combobox
         ObservableList<String> apptLengthStrings = FXCollections.observableArrayList();
-        for(LocalDateTime apptFinishLDT: apptLengths) {
+        for(LocalDateTime apptFinishLDT: availableApptLengths) {
             String apptLengthString = ((Duration.between(apptStartTime, apptFinishLDT).toString().substring(2, 4)) + " minutes");
+            apptLengthStrings.add(apptLengthString);
         }
         return apptLengthStrings;
     }

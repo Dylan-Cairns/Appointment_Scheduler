@@ -1,6 +1,5 @@
 package Controller;
 
-import DAO.AppointmentDAO;
 import DAO.CustomerDAO;
 import Model.Customer;
 import Model.DataStorage;
@@ -89,7 +88,7 @@ public class ViewCustomersController implements Initializable {
                 if (result.get() == ButtonType.OK)
                 {
                     CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
-                    CustomerDAO.getAllCustomers();
+                    CustomerDAO.getAllCustomerswithAddress();
                     ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
                 }
             }
@@ -162,6 +161,9 @@ public class ViewCustomersController implements Initializable {
             return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone());
         });
 
+        if(DataStorage.isCustomerAddressesDownloaded() == false) {
+            CustomerDAO.getAllCustomerswithAddress();
+        }
         ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
     }
 }

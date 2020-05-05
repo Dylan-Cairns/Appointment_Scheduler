@@ -31,6 +31,9 @@ public class Appointment {
 
     public Appointment(Customer customer) {
         this.customer = customer;
+        //set userId to -1; this will be allow us to test wether
+        // the appointment has been properly initialized in the add edit appt controller
+        this.userId = -1;
     }
 
     public int getAppointmentId() {

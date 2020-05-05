@@ -3,11 +3,9 @@ package DAO;
 import Model.*;
 import Utils.DBConnection;
 import Utils.DBQuery;
-import Utils.TimeFunctions;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class AppointmentDAO {
     public static Appointment getAppointmentByID(int appointmentId) {
@@ -28,14 +26,14 @@ public class AppointmentDAO {
             if(rs.next()) {
                 //use customerId to get Customer object
                 int customerId =rs.getInt("customerId");
-                Customer customer = CustomerDAO.getCustomerByID(customerId);
+                Customer customer = CustomerDAO.getCustomer(customerId);
 
                 int userId=rs.getInt("userId");
                 String apptType=rs.getString("type");
 
-                //convert date string to LocalDateTime object for start and end time
-                LocalDateTime startTime = TimeFunctions.DBTimeToLocalTime(rs.getTimestamp("start"));
-                LocalDateTime endTime = TimeFunctions.DBTimeToLocalTime(rs.getTimestamp("end"));
+                //timestamp object is automatically converted to local time zone
+                LocalDateTime startTime = rs.getTimestamp("start").toLocalDateTime();
+                LocalDateTime endTime = rs.getTimestamp("end").toLocalDateTime();
 
                 Appointment returnedAppointment = new Appointment(appointmentId, customer, userId, apptType, startTime, endTime);
                 rs.close();
@@ -102,19 +100,54 @@ public class AppointmentDAO {
             ps.setString(7, appointment.getApptType());
             ps.setString(8, "na");
             //fix time functions here
-            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(5, "na");
-            ps.setString(6, LocalDateTime.now().toString());
-            ps.setString(7, "na");
+            ps.setTimestamp(9, Timestamp.valueOf(appointment.getStartTime()));
+            ps.setTimestamp(10, Timestamp.valueOf(appointment.getEndTime()));
+            ps.setTimestamp(11, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(12, "na");
+            ps.setTimestamp(13, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(14, "na");
             //Save results into result set
             //Check save was successful
             int res = ps.executeUpdate();
 
             if (res == 1) {//one row was affected; namely the one that was inserted!
-                System.out.println("Customer added!");
+                System.out.println("appointment added!");
                 return true;
             } else {
-                System.out.println("Customer not added");
+                System.out.println("appointment not added");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean updateAppointment(Appointment appointment) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String insertStatement = "UPDATE appointment set type=?, start=?, end=?, lastUpdate=?, lastUpdateBy=? WHERE appointmentId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, insertStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+
+            ps.setString(1, appointment.getApptType());
+            ps.setTimestamp(2, Timestamp.valueOf(appointment.getStartTime()));
+            ps.setTimestamp(3, Timestamp.valueOf(appointment.getEndTime()));
+            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setInt(5, DataStorage.getStoredUser().getUserID());
+            ps.setInt(6, appointment.getAppointmentId());
+            //Save results into result set
+            //Check save was successful
+            int res = ps.executeUpdate();
+
+            if (res == 1) {//one row was affected; namely the one that was inserted!
+                System.out.println("appointment updated!");
+                return true;
+            } else {
+                System.out.println("appointment not updated");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -145,30 +178,5 @@ public class AppointmentDAO {
             throwables.printStackTrace();
         }
         return false;
-    }
-
-    public static void getAllApptTypes() {
-        try {
-            //Clear local data before downloading new appt type list
-            DataStorage.clearApptTypeList();
-            // start the database connection with an instance variable
-            Connection conn = DBConnection.getConnection();
-            //Create string to use in prepared statement
-            String selectStatement = "SELECT type FROM U06NwI.appointment";
-            //Set prepared statement in DBQuery class
-            DBQuery.setPreparedStatement(conn, selectStatement);
-            //Instantiate prepared statement
-            PreparedStatement ps = DBQuery.getPreparedStatement();
-            //Saver results into result set
-            ResultSet rs = ps.executeQuery();
-            //Create user objects from results, save in an observable list
-            while (rs.next()) {
-                String apptType = rs.getString("type");
-                DataStorage.addApptType(apptType);
-            }
-            rs.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 }

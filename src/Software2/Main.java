@@ -32,10 +32,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        LocalDateTime localdatetime = LocalDateTime.now();
-        for(String string: Utils.TimeFunctions.generateApptLengths(localdatetime)) {
-            System.out.println(string);
-        }
+
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
 

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.DataStorage;
 import Utils.CheckUserPassword;
 import Utils.DBConnection;
 import javafx.event.ActionEvent;
@@ -42,6 +43,9 @@ public class LoginScreenController {
         String userName = userNameField.getText();
         String password = passwordField.getText();
         if(CheckUserPassword.checkPassword(userName, password) == true) {
+            //if user is found and password is correct, load the next screen,
+            // and store the user as currentuser in data storage
+            DataStorage.setStoredUser(DataStorage.lookupUser(userNameField.getText()));
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
             stage.setTitle("Appointment Scheduler");

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class CustomerDAO {
 
-    public static Customer getCustomerByID(int customerID) {
+    public static Customer getCustomerWithAddress(int customerID) {
         try {
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
@@ -42,6 +42,68 @@ public class CustomerDAO {
         return null;
     }
 
+    public static Customer getCustomer(int customerID) {
+        try {
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT customerId, customerName, addressId FROM U06NwI.customer WHERE customerId = ?";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Set value cityName to be passed to function in select statement
+            ps.setInt(1, customerID);
+            //Saver results into result set
+            ResultSet rs = ps.executeQuery();
+            //Check there is an entry, if so, return entry
+            if(rs.next()) {
+                String customerName=rs.getString("customerName");
+                int addressID=rs.getInt("addressId");
+                Customer returnedCustomer = new Customer(customerID, customerName);
+                rs.close();
+                return returnedCustomer;
+            }
+            else {
+                System.out.println("No matching customer found");
+                rs.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void getAllCustomerswithAddress() {
+        try {
+            //Clear the old entries from the customer list before adding new entries from database
+            DataStorage.clearCustomerList();
+            // start the database connection with an instance variable
+            Connection conn = DBConnection.getConnection();
+            //Create string to use in prepared statement
+            String selectStatement = "SELECT customerId FROM U06NwI.customer";
+            //Set prepared statement in DBQuery class
+            DBQuery.setPreparedStatement(conn, selectStatement);
+            //Instantiate prepared statement
+            PreparedStatement ps = DBQuery.getPreparedStatement();
+            //Saver results into result set
+            ResultSet rs = ps.executeQuery();
+            //Create user objects from results, save in an observable list
+            while (rs.next()) {
+                int customerID=rs.getInt("customerId");
+                Customer customer = getCustomerWithAddress(customerID);
+                if(customer != null) {
+                    //add customer to customer list
+                    DataStorage.addCustomer(customer);
+                }
+            }
+            rs.close();
+            DataStorage.setCustomerAddressesDownloaded(true);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public static void getAllCustomers() {
         try {
             //Clear the old entries from the customer list before adding new entries from database
@@ -59,7 +121,7 @@ public class CustomerDAO {
             //Create user objects from results, save in an observable list
             while (rs.next()) {
                 int customerID=rs.getInt("customerId");
-                Customer customer = getCustomerByID(customerID);
+                Customer customer = getCustomer(customerID);
                 if(customer != null) {
                     //add customer to customer list
                     DataStorage.addCustomer(customer);

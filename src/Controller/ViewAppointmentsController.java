@@ -129,7 +129,7 @@ public class ViewAppointmentsController implements Initializable {
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
-            alert.setContentText("Please select a customer to edit.");
+            alert.setContentText("Please select an appointment to edit.");
             alert.showAndWait();
         }
     }
