@@ -12,7 +12,9 @@ public class DataStorage {
     private static ObservableList<City> cityList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
     private static Customer storedCustomer = null;
+    private static User storedUser = null;
     private static Appointment storedAppointment = null;
+    private static boolean customerAddressesDownloaded;
     private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
     private static ObservableList<String> apptTypeList = FXCollections.observableArrayList();
 
@@ -28,7 +30,9 @@ public class DataStorage {
     }
 
     public static ObservableList<City> getAllCities() {
-        CityDAO.getAllCities();
+        if(cityList.isEmpty()) {
+            CityDAO.getAllCities();
+        }
         return cityList;
     }
 
@@ -61,6 +65,14 @@ public class DataStorage {
     }
 
     public static void addApptType(String apptType) { apptTypeList.add(apptType);}
+
+    public static User getStoredUser() {
+        return storedUser;
+    }
+
+    public static void setStoredUser(User storedUser) {
+        DataStorage.storedUser = storedUser;
+    }
 
     public static User lookupUser(int userID) {
         for (User user : getAllUsers()) {
@@ -154,5 +166,13 @@ public class DataStorage {
 
     public static void clearStoredAppointment() {
         DataStorage.storedAppointment = null;
+    }
+
+    public static boolean isCustomerAddressesDownloaded() {
+        return customerAddressesDownloaded;
+    }
+
+    public static void setCustomerAddressesDownloaded(boolean customerAddressesDownloaded) {
+        DataStorage.customerAddressesDownloaded = customerAddressesDownloaded;
     }
 }
