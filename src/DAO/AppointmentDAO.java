@@ -127,7 +127,7 @@ public class AppointmentDAO {
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement
-            String insertStatement = "UPDATE appointment set type=?, start=?, end=?, lastUpdate=?, lastUpdateBy=? WHERE appointmentId = ?";
+            String insertStatement = "UPDATE appointment set type=?, start=?, end=?, lastUpdate=?, lastUpdateBy=? WHERE appointmentId=?";
             //Set prepared statement in DBQuery class
             DBQuery.setPreparedStatement(conn, insertStatement);
             //Instantiate prepared statement

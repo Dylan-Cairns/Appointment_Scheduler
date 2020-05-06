@@ -75,20 +75,19 @@ public class AddEditAppointmentController implements Initializable {
             LocalDate ld = datePickerBox.getValue();
             LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
             LocalDateTime startTime = ld.atTime(lt);
-            int apptLength = Integer.parseInt(apptLengthComboBox.getSelectionModel().getSelectedItem().toString().substring(0, 2));
+            int apptLength = Integer.parseInt(apptLengthComboBox.getSelectionModel().getSelectedItem().substring(0, 2));
             LocalDateTime endTime = startTime.plusMinutes(apptLength);
-            /* check if there is a appointment value in the storedappt variable.
-            If so,update the existing appt rather than saving a new one.
-            save a boolean value into the variable savesuccessfull
-             to determine what message to show to the user.
+            /* if the userId is -1, that means the appt is new. if not it is an existing appt.
              */
             boolean savesuccesfull;
-            if (DataStorage.getStoredAppointment().getUserId() != -1){
+            if (userId != -1){
+                //this is an existing appt. run an update command
                 int apptId = DataStorage.getStoredAppointment().getAppointmentId();
-                Appointment appointment = new Appointment(customer, userId, apptType, startTime, endTime);
+                Appointment appointment = new Appointment(apptId, customer, userId, apptType, startTime, endTime);
                 savesuccesfull = AppointmentDAO.updateAppointment(appointment);
             }
             else {
+                //this is a new appointment. run insert command
                 Appointment appointment = new Appointment(customer,
                         DataStorage.getStoredUser().getUserID(), apptType, startTime, endTime);
                 savesuccesfull = AppointmentDAO.addNewAppointment(appointment);
@@ -98,7 +97,7 @@ public class AddEditAppointmentController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment Saved");
                 alert.setContentText("Appointment Successfully saved.");
-                CustomerDAO.getAllCustomerswithAddress();
+                AppointmentDAO.getAllAppointments();
                 stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/View/ViewAppointments.fxml"));
                 stage.setTitle("View Appointments");
@@ -127,8 +126,17 @@ public class AddEditAppointmentController implements Initializable {
 
     @FXML
     void onActionSelectDate(ActionEvent event) {
-        startTimeComboBox.getItems().clear();
-        startTimeComboBox.getItems().addAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
+        //make sure the selected date is not today or earlier
+        if(datePickerBox.getValue().isEqual(LocalDate.now()) || datePickerBox.getValue().isBefore(LocalDate.now())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select a date after the current date.");
+            alert.showAndWait();
+        }
+        else {
+            startTimeComboBox.getItems().clear();
+            startTimeComboBox.getItems().addAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
+        }
     }
 
     @FXML
