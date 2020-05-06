@@ -129,10 +129,13 @@ public class AddEditAppointmentController implements Initializable {
     @FXML
     void onActionSelectDate(ActionEvent event) {
         //make sure the selected date is not today or earlier
-        if(datePickerBox.getValue().isEqual(LocalDate.now()) || datePickerBox.getValue().isBefore(LocalDate.now())) {
+        if(datePickerBox.getValue().isBefore(LocalDate.now()) ||
+                datePickerBox.getValue().isAfter(LocalDate.now().plusMonths(3))) {
+            datePickerBox.setValue(LocalDate.now());
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setContentText("Please select a date after the current date.");
+            alert.setContentText("Appointments may only be scheduled for the " +
+                    "current date or up to three months in advance");
             alert.showAndWait();
         }
         else {

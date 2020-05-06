@@ -2,6 +2,7 @@ package Utils;
 
 import Model.Appointment;
 import Model.DataStorage;
+import Model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -107,5 +108,15 @@ public class TimeFunctions {
             apptLengthStrings.add(apptLengthString);
         }
         return apptLengthStrings;
+    }
+
+    public static Appointment checkForUpcomingAppt() {
+        for(Appointment appt: DataStorage.getAllAppointments()) {
+            if(appt.getStartTime().isAfter(LocalDateTime.now()) &&
+                    appt.getStartTime().isBefore(LocalDateTime.now().plusMinutes(15))) {
+                        return appt;
+            }
+        }
+        return null;
     }
 }

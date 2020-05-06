@@ -1,33 +1,44 @@
 package Software2;
 
 import DAO.*;
-import Model.*;
-import Utils.DBConnection;
-import Utils.TimeFunctions;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-import static Model.DataStorage.getAllCustomers;
+import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Main extends Application {
 
+    static Stage stage;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/LoginScreen.fxml"));
-        primaryStage.setTitle("Appointment Scheduler");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception{
+
+        this.stage = stage;
+        //the next line sets the locale to Chinese
+        //Locale.setDefault(new Locale("zh", "CN"));
+        ResourceBundle rb = ResourceBundle.getBundle("Utils/LanguageFiles/rb");
+
+        Parent main = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginScreen.fxml"));
+            loader.setResources(rb);
+            main = loader.load();
+
+            Scene scene = new Scene(main);
+
+            stage.setScene(scene);
+
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
 
 
     public static void main(String[] args) {
@@ -38,5 +49,9 @@ public class Main extends Application {
         //launch GUI
         launch(args);
 
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

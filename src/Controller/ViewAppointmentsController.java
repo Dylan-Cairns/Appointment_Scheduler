@@ -157,6 +157,9 @@ public class ViewAppointmentsController implements Initializable {
         ViewApptTableviewTypeCol.setCellValueFactory(cellData -> {
             return new ReadOnlyStringWrapper(cellData.getValue().getApptType());});
 
+        ViewApptTableview.getSortOrder().add(ViewApptTableviewDateTimeCol);
+        ViewApptTableview.sort();
+
         viewAllRadioBttn.setSelected(true);
     }
 }
