@@ -32,7 +32,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-
         //download user list from database and store in DataStorage class
         UserDAO.getAllUsers();
 

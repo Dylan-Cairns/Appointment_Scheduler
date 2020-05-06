@@ -90,7 +90,7 @@ public class AddEditCustomerController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Customer Saved");
                 alert.setContentText("Customer Successfully saved.");
-                CustomerDAO.getAllCustomerswithAddress();
+                CustomerDAO.getAllCustomersWithAddress();
                 stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/View/ViewCustomers.fxml"));
                 stage.setTitle("View customers");

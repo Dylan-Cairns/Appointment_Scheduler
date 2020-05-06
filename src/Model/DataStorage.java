@@ -6,11 +6,12 @@ import DAO.CustomerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDateTime;
+
 public class DataStorage {
     private static ObservableList<User> userList = FXCollections.observableArrayList();
     private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
     private static ObservableList<City> cityList = FXCollections.observableArrayList();
-    private static ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
     private static Customer storedCustomer = null;
     private static User storedUser = null;
     private static Appointment storedAppointment = null;
@@ -41,6 +42,30 @@ public class DataStorage {
         }
         return apptList;
     }
+
+    public static ObservableList<Appointment> getApptsThisWeek() {
+        ObservableList<Appointment> apptsThisWeek = FXCollections.observableArrayList();
+        LocalDateTime oneWeekFromNow = LocalDateTime.now().plusDays(7);
+        for(Appointment appointment: getAllAppointments()) {
+            if (appointment.getStartTime().isAfter(LocalDateTime.now()) && appointment.getStartTime().isBefore(oneWeekFromNow)) {
+                apptsThisWeek.add(appointment);
+            }
+        }
+        return apptsThisWeek;
+    }
+
+    public static ObservableList<Appointment> getApptsThisMonth() {
+        ObservableList<Appointment> apptsThisMonth = FXCollections.observableArrayList();
+        LocalDateTime oneMonthFromNow = LocalDateTime.now().plusMonths(1);
+        for(Appointment appointment: getAllAppointments()){
+            if (appointment.getStartTime().isAfter(LocalDateTime.now()) && appointment.getStartTime().isBefore(oneMonthFromNow)) {
+                apptsThisMonth.add(appointment);
+            }
+        }
+        return apptsThisMonth;
+    }
+
+
 
 
     public static void addUser(User user) {
@@ -85,30 +110,17 @@ public class DataStorage {
         return null;
     }
 
-    public static ObservableList<Customer> lookupCustomer(String customerName) {
-        if (customerName == "") {
+    public static ObservableList<Customer> lookupCustomer(String searchName) {
+        ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
+        if (searchName == "") {
             return getAllCustomers();
         }
-        if (!(customerSearchResults.isEmpty())) ; // if list is not empty, make it empty
-        {
-            customerSearchResults.clear();
-        }
         for (Customer customer : getAllCustomers()) {
-            if (customer.getCustomerName().contains(customerName)) {
+            if (customer.getCustomerName().toLowerCase().contains(searchName.toLowerCase())) {
                 customerSearchResults.add(customer);
             }
         }
         return customerSearchResults;
-    }
-
-    //find the index of a city in the cityList
-    public static int lookupCityIndex(City searchCity) {
-        for (City city: getAllCities()) {
-            if (city.getCityID() == (searchCity.getCityID())) {
-                return getAllCities().indexOf(city);
-            }
-        }
-        return -1;
     }
 
     public static ObservableList<Appointment> lookupCustAppointments(int customerId) {
@@ -157,7 +169,7 @@ public class DataStorage {
         DataStorage.storedAppointment = null;
     }
 
-    public static boolean isCustomerAddressesDownloaded() {
+    public static boolean areCustomerAddressesDownloaded() {
         return customerAddressesDownloaded;
     }
 

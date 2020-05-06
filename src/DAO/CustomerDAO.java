@@ -74,7 +74,7 @@ public class CustomerDAO {
         return null;
     }
 
-    public static void getAllCustomerswithAddress() {
+    public static void getAllCustomersWithAddress() {
         try {
             //Clear the old entries from the customer list before adding new entries from database
             DataStorage.clearCustomerList();

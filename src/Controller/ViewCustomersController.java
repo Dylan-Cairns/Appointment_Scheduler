@@ -88,7 +88,7 @@ public class ViewCustomersController implements Initializable {
                 if (result.get() == ButtonType.OK)
                 {
                     CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
-                    CustomerDAO.getAllCustomerswithAddress();
+                    CustomerDAO.getAllCustomersWithAddress();
                     ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
                 }
             }
@@ -145,6 +145,12 @@ public class ViewCustomersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        if(!DataStorage.areCustomerAddressesDownloaded()){
+            CustomerDAO.getAllCustomersWithAddress();
+        }
+
+        ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
+
         ViewCustTableviewNameCol.setCellValueFactory(cellData -> {
             return new ReadOnlyStringWrapper(cellData.getValue().getCustomerName());
         });
@@ -161,9 +167,5 @@ public class ViewCustomersController implements Initializable {
             return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone());
         });
 
-        if(DataStorage.isCustomerAddressesDownloaded() == false) {
-            CustomerDAO.getAllCustomerswithAddress();
-        }
-        ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
     }
 }

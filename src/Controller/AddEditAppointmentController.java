@@ -67,8 +67,6 @@ public class AddEditAppointmentController implements Initializable {
         try {
             //get customer
             Customer customer = DataStorage.getStoredAppointment().getCustomer();
-            //get current user userID
-            int userId = DataStorage.getStoredUser().getUserID();
             //get appt type
             String apptType = apptTypeComboBox.getSelectionModel().getSelectedItem();
             //Get start and finish times
@@ -80,16 +78,20 @@ public class AddEditAppointmentController implements Initializable {
             /* if the userId is -1, that means the appt is new. if not it is an existing appt.
              */
             boolean savesuccesfull;
-            if (userId != -1){
+            if (DataStorage.getStoredAppointment().getUserId() != -1){
                 //this is an existing appt. run an update command
                 int apptId = DataStorage.getStoredAppointment().getAppointmentId();
+                int userId = DataStorage.getStoredAppointment().getUserId();
                 Appointment appointment = new Appointment(apptId, customer, userId, apptType, startTime, endTime);
                 savesuccesfull = AppointmentDAO.updateAppointment(appointment);
             }
             else {
                 //this is a new appointment. run insert command
+
+                //get current user userID
+                int userId = DataStorage.getStoredUser().getUserID();
                 Appointment appointment = new Appointment(customer,
-                        DataStorage.getStoredUser().getUserID(), apptType, startTime, endTime);
+                        userId, apptType, startTime, endTime);
                 savesuccesfull = AppointmentDAO.addNewAppointment(appointment);
             }
 

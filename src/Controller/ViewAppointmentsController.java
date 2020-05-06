@@ -25,13 +25,16 @@ public class ViewAppointmentsController implements Initializable {
     Parent scene;
 
     @FXML
-    private RadioButton viewAllRadioBttn;
+    private ToggleGroup group = new ToggleGroup();
 
     @FXML
-    private RadioButton viewMonthRadioBttn;
+    private RadioButton viewAllRadioBttn = new RadioButton();
 
     @FXML
-    private RadioButton viewWeekRadioBttn;
+    private RadioButton viewMonthRadioBttn = new RadioButton();
+
+    @FXML
+    private RadioButton viewWeekRadioBttn = new RadioButton();
 
     @FXML
     private Button viewApptButton;
@@ -101,13 +104,21 @@ public class ViewAppointmentsController implements Initializable {
     }
 
     @FXML
-    void onActionViewWeek(ActionEvent event) {
-
+    void onActionViewAll(ActionEvent event) {
+        ViewApptTableview.getItems().clear();
+        ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
     }
 
     @FXML
-    void onActionViewAll(ActionEvent event) {
+    void onActionViewMonth(ActionEvent event) {
+        ViewApptTableview.getItems().clear();
+        ViewApptTableview.getItems().addAll(DataStorage.getApptsThisMonth());
+    }
 
+    @FXML
+    void onActionViewWeek(ActionEvent event) {
+        ViewApptTableview.getItems().clear();
+        ViewApptTableview.getItems().addAll(DataStorage.getApptsThisWeek());
     }
 
     @FXML
@@ -134,10 +145,6 @@ public class ViewAppointmentsController implements Initializable {
         }
     }
 
-    @FXML
-    void onActionViewMonth(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -150,5 +157,6 @@ public class ViewAppointmentsController implements Initializable {
         ViewApptTableviewTypeCol.setCellValueFactory(cellData -> {
             return new ReadOnlyStringWrapper(cellData.getValue().getApptType());});
 
+        viewAllRadioBttn.setSelected(true);
     }
 }

@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewAppointmentsController">
    <children>
       <VBox layoutX="2.0" prefHeight="600.0" prefWidth="800.0">
@@ -21,13 +22,16 @@
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="buttonGroup" />
+                           </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="viewMonthRadioBttn" mnemonicParsing="false" onAction="#onActionViewMonth" prefWidth="90.0" text="Month">
+                        <RadioButton fx:id="viewMonthRadioBttn" mnemonicParsing="false" onAction="#onActionViewMonth" prefWidth="90.0" text="Month" toggleGroup="$buttonGroup">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                         </RadioButton>
-                        <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionViewWeek" prefWidth="90.0" text="Week">
+                        <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionViewWeek" prefWidth="90.0" text="Week" toggleGroup="$buttonGroup">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
