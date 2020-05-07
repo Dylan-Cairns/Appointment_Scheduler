@@ -3,6 +3,7 @@ package model;
 import dataAccessObjects.AppointmentDAO;
 import dataAccessObjects.CityDAO;
 import dataAccessObjects.CustomerDAO;
+import dataAccessObjects.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,6 +20,9 @@ public class DataStorage {
     private static final ObservableList<Appointment> apptList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
+        if(userList.isEmpty()) {
+            UserDAO.getAllUsers();
+        }
         return userList;
     }
 

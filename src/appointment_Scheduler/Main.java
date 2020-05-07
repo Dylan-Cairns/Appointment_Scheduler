@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.Reports;
 
+import javax.swing.text.Utilities;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
@@ -42,11 +44,12 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        //download user list from database and store in DataStorage class
-        UserDAO.getAllUsers();
+        System.out.println(Reports.apptSchedulePerUser());
+
+        System.out.println("done yea.");
 
         //launch GUI
-        launch(args);
+        //launch(args);
 
     }
 
