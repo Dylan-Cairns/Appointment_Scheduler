@@ -4,152 +4,130 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddEditCustomerController">
-   <children>
-      <VBox prefHeight="480.0" prefWidth="640.0">
-         <children>
-            <HBox alignment="CENTER_RIGHT" minHeight="50.0" prefHeight="50.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
-               </VBox.margin>
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditCustomerController">
+    <VBox prefHeight="480.0" prefWidth="640.0">
+        <HBox alignment="CENTER_RIGHT" minHeight="50.0" prefHeight="50.0">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="15.0"/>
+            </VBox.margin>
+        </HBox>
+        <VBox prefHeight="364.0" prefWidth="640.0">
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="30.0" right="30.0"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" minWidth="330.0" prefHeight="50.0" prefWidth="330.0">
+                    <Label minWidth="90.0" prefWidth="90.0" text="Name">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="nameTextBox" prefHeight="30.0" prefWidth="276.0">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </TextField>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" minWidth="250.0" prefWidth="250.0">
+                    <Label minWidth="50.0" prefWidth="50.0" text="Phone ">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="phoneTextField" prefHeight="30.0" prefWidth="151.0">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </TextField>
+                </HBox>
             </HBox>
-            <VBox prefHeight="364.0" prefWidth="640.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" minWidth="330.0" prefHeight="50.0" prefWidth="330.0">
-                           <children>
-                              <Label minWidth="90.0" prefWidth="90.0" text="Name">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField fx:id="nameTextBox" prefHeight="30.0" prefWidth="276.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" minWidth="250.0" prefWidth="250.0">
-                           <children>
-                              <Label minWidth="50.0" prefWidth="50.0" text="Phone ">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField fx:id="phoneTextField" prefHeight="30.0" prefWidth="151.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <Label minWidth="90.0" prefWidth="90.0" text="Address line 1">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="address1TextField" prefHeight="30.0" prefWidth="480.0">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <Label minWidth="90.0" prefWidth="90.0" text="Address line 2">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="address2TextField" prefHeight="30.0" prefWidth="480.0">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" minWidth="330.0" prefHeight="50.0" prefWidth="260.0">
-                           <children>
-                              <Label minWidth="90.0" text="City">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox fx:id="cityComboBox" prefHeight="30.0" prefWidth="262.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" minWidth="250.0" prefHeight="50.0" prefWidth="250.0">
-                           <children>
-                              <Label minWidth="90.0" text="Postal Code">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField fx:id="postalCodeTextBox" prefHeight="30.0" prefWidth="147.0">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children></HBox>
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefWidth="320.0" />
-                        <HBox alignment="CENTER_RIGHT" prefWidth="320.0" />
-                     </children>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </HBox>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onActionSaveCustomer" prefWidth="80.0" text="Save">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onActionCancel" prefWidth="80.0" text="Cancel">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="30.0" right="30.0"/>
+                </padding>
+                <Label minWidth="90.0" prefWidth="90.0" text="Address line 1">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                    </HBox.margin>
+                </Label>
+                <TextField fx:id="address1TextField" prefHeight="30.0" prefWidth="480.0">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                    </HBox.margin>
+                </TextField>
             </HBox>
-         </children>
-      </VBox>
-   </children>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="30.0" right="30.0"/>
+                </padding>
+                <Label minWidth="90.0" prefWidth="90.0" text="Address line 2">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                    </HBox.margin>
+                </Label>
+                <TextField fx:id="address2TextField" prefHeight="30.0" prefWidth="480.0">
+                    <HBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                    </HBox.margin>
+                </TextField>
+            </HBox>
+            <HBox alignment="CENTER">
+                <padding>
+                    <Insets left="30.0" right="30.0"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" minWidth="330.0" prefHeight="50.0" prefWidth="260.0">
+                    <Label minWidth="90.0" text="City">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </Label>
+                    <ComboBox fx:id="cityComboBox" prefHeight="30.0" prefWidth="262.0">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </ComboBox>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" minWidth="250.0" prefHeight="50.0" prefWidth="250.0">
+                    <Label minWidth="90.0" text="Postal Code">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </Label>
+                    <TextField fx:id="postalCodeTextBox" prefHeight="30.0" prefWidth="147.0">
+                        <HBox.margin>
+                            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                        </HBox.margin>
+                    </TextField>
+                </HBox>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+                <padding>
+                    <Insets left="30.0" right="30.0"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" prefWidth="320.0"/>
+                <HBox alignment="CENTER_RIGHT" prefWidth="320.0"/>
+            </HBox>
+        </VBox>
+        <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="600.0">
+            <VBox.margin>
+                <Insets bottom="15.0"/>
+            </VBox.margin>
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onActionSaveCustomer" prefWidth="80.0"
+                    text="Save">
+                <HBox.margin>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onActionCancel" prefWidth="80.0"
+                    text="Cancel">
+                <HBox.margin>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </VBox>
 </AnchorPane>

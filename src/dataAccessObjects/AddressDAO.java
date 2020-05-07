@@ -1,13 +1,11 @@
-package DAO;
+package dataAccessObjects;
 
-import Model.*;
-import Utils.DBConnection;
-import Utils.DBQuery;
+import model.*;
+import utilities.DBConnection;
+import utilities.DBQuery;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-
-import static java.lang.Integer.parseInt;
 
 public class AddressDAO {
 
@@ -81,9 +79,8 @@ public class AddressDAO {
             //resultset contains addressId of the new address
             ResultSet genKeys = ps.getGeneratedKeys();
             genKeys.next();
-            int generatedKey = genKeys.getInt(1);
             //return the addressId
-            return generatedKey;
+            return genKeys.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

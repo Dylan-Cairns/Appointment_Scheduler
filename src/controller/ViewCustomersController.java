@@ -1,8 +1,8 @@
-package Controller;
+package controller;
 
-import DAO.CustomerDAO;
-import Model.Customer;
-import Model.DataStorage;
+import dataAccessObjects.CustomerDAO;
+import model.Customer;
+import model.DataStorage;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -89,7 +89,7 @@ public class ViewCustomersController implements Initializable {
                 {
                     CustomerDAO.deleteCustomer(ViewCustTableview.getSelectionModel().getSelectedItem().getCustomerID());
                     CustomerDAO.getAllCustomersWithAddress();
-                    ViewCustTableview.setItems(Model.DataStorage.getAllCustomers());
+                    ViewCustTableview.setItems(model.DataStorage.getAllCustomers());
                 }
             }
 
@@ -151,21 +151,13 @@ public class ViewCustomersController implements Initializable {
 
         ViewCustTableview.getItems().addAll(DataStorage.getAllCustomers());
 
-        ViewCustTableviewNameCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getCustomerName());
-        });
+        ViewCustTableviewNameCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCustomerName()));
 
-        ViewCustTableviewCityCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getCity().getCityName());
-        });
+        ViewCustTableviewCityCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress().getCity().getCityName()));
 
-        ViewCustTableviewCountryCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getCity().getCountry().getCountryName());
-        });
+        ViewCustTableviewCountryCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress().getCity().getCountry().getCountryName()));
 
-        ViewCustTableviewPhoneCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone());
-        });
+        ViewCustTableviewPhoneCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getAddress().getPhone()));
 
     }
 }

@@ -1,6 +1,6 @@
-package Software2;
+package appointment_Scheduler;
 
-import DAO.*;
+import dataAccessObjects.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
@@ -18,10 +17,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        this.stage = stage;
+        Main.stage = stage;
         //the next line sets the locale to Chinese
         //Locale.setDefault(new Locale("zh", "CN"));
-        ResourceBundle rb = ResourceBundle.getBundle("Utils/LanguageFiles/rb");
+        ResourceBundle rb = ResourceBundle.getBundle("utilities/LanguageFiles/rb");
 
         Parent main = null;
         try {

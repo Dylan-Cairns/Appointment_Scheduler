@@ -9,78 +9,71 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewCustomersController">
-   <children>
-      <VBox layoutX="2.0" prefHeight="600.0" prefWidth="800.0">
-         <children>
-            <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="800.0">
-                     <children>
-                        <TextField fx:id="customerSearchTxtBox" alignment="TOP_RIGHT" prefHeight="30.0" prefWidth="250.0">
-                           <HBox.margin>
-                              <Insets left="30.0" right="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <Button fx:id="customerSearchButton" mnemonicParsing="false" onAction="#onActionSearchCustomer" prefHeight="30.0" prefWidth="80.0" text="Search">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-                     <children>
-                        <Button fx:id="viewCustomerButton" mnemonicParsing="false" onAction="#onActionEditCustomer" prefWidth="80.0" text="View/Edit">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#onActionDeleteCustomer" prefWidth="80.0" text="Delete">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="addCustomerButton" mnemonicParsing="false" onAction="#onActionAddCustomer" prefHeight="30.0" prefWidth="80.0" text="Add">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="15.0" top="30.0" />
-               </padding>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCustomersController">
+    <VBox layoutX="2.0" prefHeight="600.0" prefWidth="800.0">
+        <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+            <padding>
+                <Insets bottom="15.0" top="30.0"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" prefWidth="800.0">
+                <TextField fx:id="customerSearchTxtBox" alignment="TOP_RIGHT" prefHeight="30.0"
+                           prefWidth="250.0">
+                    <HBox.margin>
+                        <Insets left="30.0" right="10.0"/>
+                    </HBox.margin>
+                </TextField>
+                <Button fx:id="customerSearchButton" mnemonicParsing="false" onAction="#onActionSearchCustomer"
+                        prefHeight="30.0" prefWidth="80.0" text="Search">
+                    <HBox.margin>
+                        <Insets/>
+                    </HBox.margin>
+                </Button>
             </HBox>
-            <TableView fx:id="ViewCustTableview" prefHeight="489.0" prefWidth="740.0">
-              <columns>
-                 <TableColumn fx:id="ViewCustTableviewNameCol" prefWidth="300.0" text="Name" />
-                 <TableColumn fx:id="ViewCustTableviewCityCol" prefWidth="200.0" text="City" />
-                 <TableColumn fx:id="ViewCustTableviewCountryCol" text="Country" />
-                 <TableColumn fx:id="ViewCustTableviewPhoneCol" prefWidth="160.0" text="Phone" />
-              </columns>
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" top="15.0" />
-               </VBox.margin>
-            </TableView>
             <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-                     <children>
-                        <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#onActionBackToMenu" prefHeight="30.0" prefWidth="80.0" text="Back">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" top="15.0" />
-               </padding>
+                <Button fx:id="viewCustomerButton" mnemonicParsing="false" onAction="#onActionEditCustomer"
+                        prefWidth="80.0" text="View/Edit">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#onActionDeleteCustomer"
+                        prefWidth="80.0" text="Delete">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="addCustomerButton" mnemonicParsing="false" onAction="#onActionAddCustomer"
+                        prefHeight="30.0" prefWidth="80.0" text="Add">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Button>
             </HBox>
-         </children>
-      </VBox>
-   </children>
+        </HBox>
+        <TableView fx:id="ViewCustTableview" prefHeight="489.0" prefWidth="740.0">
+            <columns>
+                <TableColumn fx:id="ViewCustTableviewNameCol" prefWidth="300.0" text="Name"/>
+                <TableColumn fx:id="ViewCustTableviewCityCol" prefWidth="200.0" text="City"/>
+                <TableColumn fx:id="ViewCustTableviewCountryCol" text="Country"/>
+                <TableColumn fx:id="ViewCustTableviewPhoneCol" prefWidth="160.0" text="Phone"/>
+            </columns>
+            <VBox.margin>
+                <Insets left="30.0" right="30.0" top="15.0"/>
+            </VBox.margin>
+        </TableView>
+        <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+            <padding>
+                <Insets bottom="30.0" top="15.0"/>
+            </padding>
+            <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+                <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#onActionBackToMenu"
+                        prefHeight="30.0" prefWidth="80.0" text="Back">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Button>
+            </HBox>
+        </HBox>
+    </VBox>
 </AnchorPane>

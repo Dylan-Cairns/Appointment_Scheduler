@@ -1,10 +1,8 @@
-package Controller;
+package controller;
 
-import DAO.AppointmentDAO;
-import DAO.CustomerDAO;
-import Model.Appointment;
-import Model.Customer;
-import Model.DataStorage;
+import dataAccessObjects.AppointmentDAO;
+import model.Appointment;
+import model.DataStorage;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -91,7 +89,7 @@ public class ViewAppointmentsController implements Initializable {
             {
                 AppointmentDAO.deleteAppointment(ViewApptTableview.getSelectionModel().getSelectedItem().getAppointmentId());
                 AppointmentDAO.getAllAppointments();
-                ViewApptTableview.setItems(Model.DataStorage.getAllAppointments());
+                ViewApptTableview.setItems(model.DataStorage.getAllAppointments());
             }
         }
         else
@@ -150,12 +148,9 @@ public class ViewAppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
 
-        ViewApptTableviewNameCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getCustomer().getCustomerName());});
-        ViewApptTableviewDateTimeCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getStartTime().toString());});
-        ViewApptTableviewTypeCol.setCellValueFactory(cellData -> {
-            return new ReadOnlyStringWrapper(cellData.getValue().getApptType());});
+        ViewApptTableviewNameCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCustomer().getCustomerName()));
+        ViewApptTableviewDateTimeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getStartTime().toString()));
+        ViewApptTableviewTypeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getApptType()));
 
         ViewApptTableview.getSortOrder().add(ViewApptTableviewDateTimeCol);
         ViewApptTableview.sort();

@@ -1,8 +1,8 @@
-package DAO;
+package dataAccessObjects;
 
-import Model.*;
-import Utils.DBConnection;
-import Utils.DBQuery;
+import model.*;
+import utilities.DBConnection;
+import utilities.DBQuery;
 
 import java.sql.*;
 import java.time.LocalDateTime;

@@ -1,9 +1,8 @@
-package Controller;
+package controller;
 
-import DAO.CustomerDAO;
-import Model.Appointment;
-import Model.Customer;
-import Model.DataStorage;
+import model.Appointment;
+import model.Customer;
+import model.DataStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

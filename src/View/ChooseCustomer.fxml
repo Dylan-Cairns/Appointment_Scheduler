@@ -5,58 +5,52 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ChooseCustomerController">
-   <children>
-      <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="200.0" prefWidth="400.0">
-         <children>
-            <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <Label text="Choose Customer:">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="10.0" top="15.0" />
-                     </padding>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <ComboBox fx:id="customerNameComboBox" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="300.0">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </ComboBox>
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_CENTER" minHeight="50.0" prefHeight="100.0" prefWidth="400.0">
-               <children>
-                  <Button fx:id="continueButton" mnemonicParsing="false" onAction="#onActionContinue" prefWidth="80.0" text="Continue">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onActionCancel" prefWidth="80.0" text="Cancel">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChooseCustomerController">
+    <VBox alignment="TOP_CENTER" layoutY="-2.0" prefHeight="200.0" prefWidth="400.0">
+        <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0">
+            <padding>
+                <Insets bottom="10.0" top="10.0"/>
+            </padding>
+            <Label text="Choose Customer:">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
+                <padding>
+                    <Insets bottom="10.0" top="15.0"/>
+                </padding>
+                <font>
+                    <Font size="15.0"/>
+                </font>
+            </Label>
+        </HBox>
+        <HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0">
+            <padding>
+                <Insets bottom="10.0" top="10.0"/>
+            </padding>
+            <ComboBox fx:id="customerNameComboBox" maxHeight="30.0" minHeight="30.0" prefHeight="30.0"
+                      prefWidth="300.0">
+                <HBox.margin>
+                    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0"/>
+                </HBox.margin>
+            </ComboBox>
+        </HBox>
+        <HBox alignment="BOTTOM_CENTER" minHeight="50.0" prefHeight="100.0" prefWidth="400.0">
+            <padding>
+                <Insets bottom="10.0" top="10.0"/>
+            </padding>
+            <Button fx:id="continueButton" mnemonicParsing="false" onAction="#onActionContinue" prefWidth="80.0"
+                    text="Continue">
+                <HBox.margin>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#onActionCancel" prefWidth="80.0"
+                    text="Cancel">
+                <HBox.margin>
+                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </VBox>
 </AnchorPane>

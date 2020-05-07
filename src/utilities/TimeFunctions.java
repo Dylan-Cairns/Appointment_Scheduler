@@ -1,12 +1,10 @@
-package Utils;
+package utilities;
 
-import Model.Appointment;
-import Model.DataStorage;
-import Model.User;
+import model.Appointment;
+import model.DataStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.crypto.Data;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -21,8 +19,7 @@ public class TimeFunctions {
         //change time zone
         ZonedDateTime ZDTLocalStart = ZDTStart.withZoneSameInstant(newzid);
         //change variable type
-        LocalDateTime ldtStart = ZDTLocalStart.toLocalDateTime();
-        return ldtStart;
+        return ZDTLocalStart.toLocalDateTime();
     }
 
     public static Timestamp localTimetoDBTime(LocalDateTime localTime) {
@@ -30,8 +27,7 @@ public class TimeFunctions {
         ZonedDateTime zdTime = localTime.atZone(zoneId);
         ZonedDateTime utcTime = zdTime.withZoneSameInstant(ZoneId.of("UTC"));
         LocalDateTime ldtTime = utcTime.toLocalDateTime();
-        Timestamp DBtime = Timestamp.valueOf(ldtTime);
-        return DBtime;
+        return Timestamp.valueOf(ldtTime);
     }
 
     public static ObservableList<LocalTime> getTimeslots(LocalDate selectedDate) {

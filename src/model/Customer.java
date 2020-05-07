@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Customer {
     private int customerID;
@@ -14,7 +14,6 @@ public class Customer {
 
     //constructor without Id, for use when creating a temp customer to insert into the DB
     public Customer(String customerName, Address address) {
-        this.customerID = customerID;
         this.customerName = customerName;
         this.address = address;
     }

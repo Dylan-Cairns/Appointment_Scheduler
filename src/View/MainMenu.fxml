@@ -6,44 +6,44 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0">
-         <children>
-            <Button fx:id="viewCustomersBtn" mnemonicParsing="false" onAction="#onActionViewCustomers" prefHeight="50.0" prefWidth="300.0" text="View Customers">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin>
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0">
+        <Button fx:id="viewCustomersBtn" mnemonicParsing="false" onAction="#onActionViewCustomers" prefHeight="50.0"
+                prefWidth="300.0" text="View Customers">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="30.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="viewAppointmentsBtn" mnemonicParsing="false" onAction="#onActionViewAppointments"
+                prefHeight="50.0" prefWidth="300.0" text="View Appointments">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="30.0"/>
+            </VBox.margin>
+        </Button>
+        <Button fx:id="viewReportsBtn" mnemonicParsing="false" onAction="#onActionViewReports" prefHeight="50.0"
+                prefWidth="300.0" text="View Reports">
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <VBox.margin>
+                <Insets bottom="40.0"/>
+            </VBox.margin>
+        </Button>
+        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+              prefHeight="31.0" prefWidth="300.0">
+            <Button fx:id="exitBtn" layoutX="90.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onActionExit"
+                    prefHeight="30.0" prefWidth="120.0" text="Exit">
+                <opaqueInsets>
+                    <Insets/>
+                </opaqueInsets>
             </Button>
-            <Button fx:id="viewAppointmentsBtn" mnemonicParsing="false" onAction="#onActionViewAppointments" prefHeight="50.0" prefWidth="300.0" text="View Appointments">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="viewReportsBtn" mnemonicParsing="false" onAction="#onActionViewReports" prefHeight="50.0" prefWidth="300.0" text="View Reports">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </Button>
-            <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="300.0">
-               <children>
-                  <Button fx:id="exitBtn" layoutX="90.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onActionExit" prefHeight="30.0" prefWidth="120.0" text="Exit">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-               </children>
-            </Pane>
-         </children>
-      </VBox>
-   </children>
+        </Pane>
+    </VBox>
 </AnchorPane>

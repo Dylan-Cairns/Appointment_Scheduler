@@ -1,7 +1,7 @@
-package Utils;
+package utilities;
 
-import Model.DataStorage;
-import Model.User;
+import model.DataStorage;
+import model.User;
 
 public class CheckUserPassword {
     public static boolean checkPassword(String userName, String password){

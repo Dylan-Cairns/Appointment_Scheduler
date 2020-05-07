@@ -1,9 +1,9 @@
-package DAO;
+package dataAccessObjects;
 
-import Model.DataStorage;
-import Model.User;
-import Utils.DBConnection;
-import Utils.DBQuery;
+import model.DataStorage;
+import model.User;
+import utilities.DBConnection;
+import utilities.DBQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

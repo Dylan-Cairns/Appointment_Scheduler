@@ -1,8 +1,8 @@
-package DAO;
+package dataAccessObjects;
 
-import Model.Country;
-import Utils.DBConnection;
-import Utils.DBQuery;
+import model.Country;
+import utilities.DBConnection;
+import utilities.DBQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

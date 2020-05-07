@@ -1,9 +1,8 @@
-package Controller;
+package controller;
 
-import DAO.AppointmentDAO;
-import DAO.CustomerDAO;
-import Model.*;
-import Utils.TimeFunctions;
+import dataAccessObjects.AppointmentDAO;
+import model.*;
+import utilities.TimeFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,7 +94,7 @@ public class AddEditAppointmentController implements Initializable {
                 savesuccesfull = AppointmentDAO.addNewAppointment(appointment);
             }
 
-            if(savesuccesfull == true) {
+            if(savesuccesfull) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Appointment Saved");
                 alert.setContentText("Appointment Successfully saved.");
@@ -150,7 +149,7 @@ public class AddEditAppointmentController implements Initializable {
         LocalDate ld = datePickerBox.getValue();
         LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime ldt = ld.atTime(lt);
-        apptLengthComboBox.getItems().addAll(Utils.TimeFunctions.generateApptLengths(ldt));
+        apptLengthComboBox.getItems().addAll(utilities.TimeFunctions.generateApptLengths(ldt));
     }
 
     @FXML

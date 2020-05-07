@@ -10,88 +10,82 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.ToggleGroup?>
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ViewAppointmentsController">
-   <children>
-      <VBox layoutX="2.0" prefHeight="600.0" prefWidth="800.0">
-         <children>
-            <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="800.0">
-                     <children>
-                        <RadioButton fx:id="viewAllRadioBttn" mnemonicParsing="false" onAction="#onActionViewAll" prefWidth="90.0" text="All">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="buttonGroup" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="viewMonthRadioBttn" mnemonicParsing="false" onAction="#onActionViewMonth" prefWidth="90.0" text="Month" toggleGroup="$buttonGroup">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                        <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionViewWeek" prefWidth="90.0" text="Week" toggleGroup="$buttonGroup">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </RadioButton>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-                     <children>
-                        <Button fx:id="viewApptButton" mnemonicParsing="false" onAction="#onActionEditAppt" prefWidth="80.0" text="View/Edit">
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="deleteApptButton" mnemonicParsing="false" onAction="#onActionDeleteAppt" prefWidth="80.0" text="Delete">
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="addApptButton" mnemonicParsing="false" onAction="#onActionAddAppt" prefHeight="30.0" prefWidth="80.0" text="Add">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="15.0" top="30.0" />
-               </padding>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAppointmentsController">
+    <VBox layoutX="2.0" prefHeight="600.0" prefWidth="800.0">
+        <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+            <padding>
+                <Insets bottom="15.0" top="30.0"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" prefWidth="800.0">
+                <HBox.margin>
+                    <Insets left="30.0"/>
+                </HBox.margin>
+                <RadioButton fx:id="viewAllRadioBttn" mnemonicParsing="false" onAction="#onActionViewAll"
+                             prefWidth="90.0" text="All">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </HBox.margin>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="buttonGroup"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="viewMonthRadioBttn" mnemonicParsing="false" onAction="#onActionViewMonth"
+                             prefWidth="90.0" text="Month" toggleGroup="$buttonGroup">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </HBox.margin>
+                </RadioButton>
+                <RadioButton fx:id="viewWeekRadioBttn" mnemonicParsing="false" onAction="#onActionViewWeek"
+                             prefWidth="90.0" text="Week" toggleGroup="$buttonGroup">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </HBox.margin>
+                </RadioButton>
             </HBox>
-            <TableView fx:id="ViewApptTableview" prefHeight="489.0" prefWidth="740.0">
-              <columns>
-                 <TableColumn fx:id="ViewApptTableviewNameCol" prefWidth="300.0" text="Customer Name" />
-                 <TableColumn fx:id="ViewApptTableviewDateTimeCol" prefWidth="220.0" text="Date and Time" />
-                 <TableColumn fx:id="ViewApptTableviewTypeCol" prefWidth="220.0" text="Appt Type" />
-              </columns>
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" top="15.0" />
-               </VBox.margin>
-            </TableView>
             <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
-                     <children>
-                        <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#onActionBackToMenu" prefHeight="30.0" prefWidth="80.0" text="Back">
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="30.0" top="15.0" />
-               </padding>
+                <Button fx:id="viewApptButton" mnemonicParsing="false" onAction="#onActionEditAppt"
+                        prefWidth="80.0" text="View/Edit">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="deleteApptButton" mnemonicParsing="false" onAction="#onActionDeleteAppt"
+                        prefWidth="80.0" text="Delete">
+                    <HBox.margin>
+                        <Insets left="10.0" right="10.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="addApptButton" mnemonicParsing="false" onAction="#onActionAddAppt"
+                        prefHeight="30.0" prefWidth="80.0" text="Add">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Button>
             </HBox>
-         </children>
-      </VBox>
-   </children>
+        </HBox>
+        <TableView fx:id="ViewApptTableview" prefHeight="489.0" prefWidth="740.0">
+            <columns>
+                <TableColumn fx:id="ViewApptTableviewNameCol" prefWidth="300.0" text="Customer Name"/>
+                <TableColumn fx:id="ViewApptTableviewDateTimeCol" prefWidth="220.0" text="Date and Time"/>
+                <TableColumn fx:id="ViewApptTableviewTypeCol" prefWidth="220.0" text="Appt Type"/>
+            </columns>
+            <VBox.margin>
+                <Insets left="30.0" right="30.0" top="15.0"/>
+            </VBox.margin>
+        </TableView>
+        <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+            <padding>
+                <Insets bottom="30.0" top="15.0"/>
+            </padding>
+            <HBox alignment="CENTER_RIGHT" prefWidth="800.0">
+                <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#onActionBackToMenu"
+                        prefHeight="30.0" prefWidth="80.0" text="Back">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Button>
+            </HBox>
+        </HBox>
+    </VBox>
 </AnchorPane>

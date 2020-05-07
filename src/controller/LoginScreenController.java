@@ -1,11 +1,11 @@
-package Controller;
+package controller;
 
-import Model.Appointment;
-import Model.DataStorage;
-import Software2.Main;
-import Utils.CheckUserPassword;
-import Utils.DBConnection;
-import Utils.TimeFunctions;
+import model.Appointment;
+import model.DataStorage;
+import appointment_Scheduler.Main;
+import utilities.CheckUserPassword;
+import utilities.DBConnection;
+import utilities.TimeFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginScreenController implements Initializable {

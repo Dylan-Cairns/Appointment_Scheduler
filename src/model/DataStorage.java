@@ -1,8 +1,8 @@
-package Model;
+package model;
 
-import DAO.AppointmentDAO;
-import DAO.CityDAO;
-import DAO.CustomerDAO;
+import dataAccessObjects.AppointmentDAO;
+import dataAccessObjects.CityDAO;
+import dataAccessObjects.CustomerDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -112,7 +112,7 @@ public class DataStorage {
 
     public static ObservableList<Customer> lookupCustomer(String searchName) {
         ObservableList<Customer> customerSearchResults = FXCollections.observableArrayList();
-        if (searchName == "") {
+        if (searchName.equals("")) {
             return getAllCustomers();
         }
         for (Customer customer : getAllCustomers()) {

@@ -1,11 +1,10 @@
-package DAO;
+package dataAccessObjects;
 
-import Model.City;
-import Model.Country;
-import Model.Customer;
-import Model.DataStorage;
-import Utils.DBConnection;
-import Utils.DBQuery;
+import model.City;
+import model.Country;
+import model.DataStorage;
+import utilities.DBConnection;
+import utilities.DBQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

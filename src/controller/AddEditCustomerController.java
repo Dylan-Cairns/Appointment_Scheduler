@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import DAO.CustomerDAO;
-import Model.*;
+import dataAccessObjects.CustomerDAO;
+import model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,7 +86,7 @@ public class AddEditCustomerController implements Initializable {
                 savesuccesfull = CustomerDAO.addNewCustomer(customer);
             }
 
-            if(savesuccesfull == true) {
+            if(savesuccesfull) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Customer Saved");
                 alert.setContentText("Customer Successfully saved.");

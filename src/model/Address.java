@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Address {
     private int addressID;
@@ -18,7 +18,6 @@ public class Address {
     }
 
     public Address(String addressLine1, String addressLine2, City city, String postalCode, String phone) {
-        this.addressID = addressID;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
