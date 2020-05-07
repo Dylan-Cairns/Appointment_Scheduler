@@ -51,12 +51,6 @@ public class LoginScreenController implements Initializable {
     ResourceBundle rb;
 
     @FXML
-    void onActionExit(ActionEvent event) {
-        DBConnection.closeConnection();
-        System.exit(0);
-    }
-
-    @FXML
     void onActionLogin(ActionEvent event) throws IOException {
         String userName = userNameField.getText();
         String password = passwordField.getText();
@@ -103,6 +97,13 @@ public class LoginScreenController implements Initializable {
         loginButton.setText(rb.getString("loginButton"));
         exitProgramButton.setText(rb.getString("exitButton"));
         Main.getStage().setTitle(rb.getString("windowTitle"));
+
+        //Use lambda expressions to control the exit button.
+        // Lambda expressions are less verbose which makes code easier to read.
+        exitProgramButton.setOnAction(event -> {
+            DBConnection.closeConnection();
+            System.exit(0);
+        });
     }
 
 }

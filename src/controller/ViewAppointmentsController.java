@@ -104,16 +104,19 @@ public class ViewAppointmentsController implements Initializable {
     @FXML
     void onActionViewAll(ActionEvent event) {
         ViewApptTableview.getItems().setAll(DataStorage.getAllAppointments());
+        ViewApptTableview.sort();
     }
 
     @FXML
     void onActionViewMonth(ActionEvent event) {
         ViewApptTableview.getItems().setAll(DataStorage.getApptsThisMonth());
+        ViewApptTableview.sort();
     }
 
     @FXML
     void onActionViewWeek(ActionEvent event) {
         ViewApptTableview.getItems().setAll(DataStorage.getApptsThisWeek());
+        ViewApptTableview.sort();
     }
 
     @FXML
@@ -154,7 +157,5 @@ public class ViewAppointmentsController implements Initializable {
         ViewApptTableview.sort();
 
         viewAllRadioBttn.setSelected(true);
-
-        //viewAllRadioBttn.setOnAction(actionEvent -> ViewApptTableview.getItems().setAll(DataStorage.getAllAppointments()));
     }
 }

@@ -149,14 +149,16 @@ public class AddEditAppointmentController implements Initializable {
         LocalDateTime selectedTime = ld.atTime(lt);
         System.out.println(selectedTime);
         System.out.println(LocalDateTime.now());
-        if(selectedTime.isBefore(LocalDateTime.now())) {
+        if (selectedTime.isBefore(LocalDateTime.now())) {
+            startTimeComboBox.getSelectionModel().clearSelection();
+            startTimeComboBox.getItems().setAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("Please select a time later than now");
             alert.showAndWait();
-            startTimeComboBox.getSelectionModel().clearSelection();
+        } else {
+            apptLengthComboBox.getItems().setAll(utilities.TimeFunctions.generateApptLengths(selectedTime));
         }
-        apptLengthComboBox.getItems().setAll(utilities.TimeFunctions.generateApptLengths(selectedTime));
     }
 
     @FXML

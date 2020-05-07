@@ -41,7 +41,7 @@
         </HBox>
         <HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="30.0" prefWidth="437.0" spacing="10.0" />
         <HBox alignment="BOTTOM_RIGHT" fillHeight="false" prefHeight="30.0" prefWidth="437.0" spacing="10.0">
-            <Button fx:id="exitProgramButton" mnemonicParsing="false" onAction="#onActionExit" text="Exit" />
+            <Button fx:id="exitProgramButton" mnemonicParsing="false" text="Exit" />
         </HBox>
     </VBox>
 </AnchorPane>
