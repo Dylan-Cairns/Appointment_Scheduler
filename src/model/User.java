@@ -2,9 +2,9 @@ package model;
 
 public class User {
 
-    private int userID;
-    private String userName;
-    private String password;
+    private final int userID;
+    private final String userName;
+    private final String password;
 
     public User(int userID, String userName, String password) {
         this.userID = userID;

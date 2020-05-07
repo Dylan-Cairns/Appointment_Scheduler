@@ -55,7 +55,7 @@ public class AddEditAppointmentController implements Initializable {
         if (result.get() == ButtonType.OK)
         {
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/View/ViewAppointments.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
         }
@@ -100,7 +100,7 @@ public class AddEditAppointmentController implements Initializable {
                 alert.setContentText("Appointment Successfully saved.");
                 AppointmentDAO.getAllAppointments();
                 stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/View/ViewAppointments.fxml"));
+                scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
                 stage.setTitle("View Appointments");
                 stage.setScene(new Scene(scene));
                 stage.show();
@@ -138,18 +138,25 @@ public class AddEditAppointmentController implements Initializable {
             alert.showAndWait();
         }
         else {
-            startTimeComboBox.getItems().clear();
-            startTimeComboBox.getItems().addAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
+            startTimeComboBox.getItems().setAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
         }
     }
 
     @FXML
     void onActionStartTimeComboBox(ActionEvent event) {
-        apptLengthComboBox.getItems().clear();
         LocalDate ld = datePickerBox.getValue();
         LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
-        LocalDateTime ldt = ld.atTime(lt);
-        apptLengthComboBox.getItems().addAll(utilities.TimeFunctions.generateApptLengths(ldt));
+        LocalDateTime selectedTime = ld.atTime(lt);
+        System.out.println(selectedTime);
+        System.out.println(LocalDateTime.now());
+        if(selectedTime.isBefore(LocalDateTime.now())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select a time later than now");
+            alert.showAndWait();
+            startTimeComboBox.getSelectionModel().clearSelection();
+        }
+        apptLengthComboBox.getItems().setAll(utilities.TimeFunctions.generateApptLengths(selectedTime));
     }
 
     @FXML

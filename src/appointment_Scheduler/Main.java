@@ -22,9 +22,9 @@ public class Main extends Application {
         //Locale.setDefault(new Locale("zh", "CN"));
         ResourceBundle rb = ResourceBundle.getBundle("utilities/LanguageFiles/rb");
 
-        Parent main = null;
+        Parent main;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginScreen.fxml"));
             loader.setResources(rb);
             main = loader.load();
 

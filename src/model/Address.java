@@ -2,11 +2,11 @@ package model;
 
 public class Address {
     private int addressID;
-    private String addressLine1;
-    private String addressLine2;
-    private City city;
-    private String postalCode;
-    private String phone;
+    private final String addressLine1;
+    private final String addressLine2;
+    private final City city;
+    private final String postalCode;
+    private final String phone;
 
     public Address(int addressID, String addressLine1, String addressLine2, City city, String postalCode, String phone) {
         this.addressID = addressID;

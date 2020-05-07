@@ -1,8 +1,8 @@
 package model;
 
 public class Country {
-    private int countryID;
-    private String countryName;
+    private final int countryID;
+    private final String countryName;
 
     public Country(int countryID, String countryName) {
         this.countryID = countryID;

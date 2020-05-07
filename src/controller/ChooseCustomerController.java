@@ -35,7 +35,7 @@ public class ChooseCustomerController implements Initializable {
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/ViewCustomers.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
         stage.setTitle("View customers");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -48,7 +48,7 @@ public class ChooseCustomerController implements Initializable {
             Stage stage;
             Parent root;
             stage=(Stage) customerNameComboBox.getScene().getWindow();
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/View/AddEditAppointment.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/AddEditAppointment.fxml"));
             root =loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);

@@ -2,7 +2,7 @@ package model;
 
 public class Customer {
     private int customerID;
-    private String customerName;
+    private final String customerName;
     private Address address;
 
     //complete constructor, used for downloading complete customer objects from the database

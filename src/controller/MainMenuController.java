@@ -39,7 +39,7 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionViewAppointments(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/ViewAppointments.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
         stage.setTitle("View Appointments");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -48,7 +48,7 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionViewCustomers(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/ViewCustomers.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewCustomers.fxml"));
         stage.setTitle("View customers");
         stage.setScene(new Scene(scene));
         stage.show();

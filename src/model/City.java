@@ -1,9 +1,9 @@
 package model;
 
 public class City {
-    private int cityID;
-    private String cityName;
-    private Country country;
+    private final int cityID;
+    private final String cityName;
+    private final Country country;
 
     public City(int cityID, String cityName, Country country) {
         this.cityID = cityID;

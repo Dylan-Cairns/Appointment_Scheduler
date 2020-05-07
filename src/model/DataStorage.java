@@ -9,14 +9,14 @@ import javafx.collections.ObservableList;
 import java.time.LocalDateTime;
 
 public class DataStorage {
-    private static ObservableList<User> userList = FXCollections.observableArrayList();
-    private static ObservableList<Customer> customerList = FXCollections.observableArrayList();
-    private static ObservableList<City> cityList = FXCollections.observableArrayList();
+    private static final ObservableList<User> userList = FXCollections.observableArrayList();
+    private static final ObservableList<Customer> customerList = FXCollections.observableArrayList();
+    private static final ObservableList<City> cityList = FXCollections.observableArrayList();
     private static Customer storedCustomer = null;
     private static User storedUser = null;
     private static Appointment storedAppointment = null;
     private static boolean customerAddressesDownloaded;
-    private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+    private static final ObservableList<Appointment> apptList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
         return userList;

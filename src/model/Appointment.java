@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public class Appointment {
     private int appointmentId;
-    private Customer customer;
-    private int userId;
+    private final Customer customer;
+    private final int userId;
     private String apptType;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

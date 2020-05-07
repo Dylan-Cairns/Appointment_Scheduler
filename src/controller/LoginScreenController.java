@@ -79,7 +79,7 @@ public class LoginScreenController implements Initializable {
             // load the next screen, and store the user as currentuser in data storage
             DataStorage.setStoredUser(DataStorage.lookupUser(userNameField.getText()));
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+            scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             stage.setTitle("Appointment Scheduler");
             stage.setScene(new Scene(scene));
             stage.show();

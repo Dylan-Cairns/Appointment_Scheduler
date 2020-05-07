@@ -23,16 +23,16 @@ public class ViewAppointmentsController implements Initializable {
     Parent scene;
 
     @FXML
-    private ToggleGroup group = new ToggleGroup();
+    private final ToggleGroup group = new ToggleGroup();
 
     @FXML
-    private RadioButton viewAllRadioBttn = new RadioButton();
+    private final RadioButton viewAllRadioBttn = new RadioButton();
 
     @FXML
-    private RadioButton viewMonthRadioBttn = new RadioButton();
+    private final RadioButton viewMonthRadioBttn = new RadioButton();
 
     @FXML
-    private RadioButton viewWeekRadioBttn = new RadioButton();
+    private final RadioButton viewWeekRadioBttn = new RadioButton();
 
     @FXML
     private Button viewApptButton;
@@ -61,7 +61,7 @@ public class ViewAppointmentsController implements Initializable {
     @FXML
     void onActionAddAppt(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/ChooseCustomer.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/ChooseCustomer.fxml"));
         stage.setTitle("Choose Customer");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -70,7 +70,7 @@ public class ViewAppointmentsController implements Initializable {
     @FXML
     void onActionBackToMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/View/MainMenu.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setTitle("Appointment Scheduler");
         stage.setScene(new Scene(scene));
         stage.show();
@@ -103,20 +103,17 @@ public class ViewAppointmentsController implements Initializable {
 
     @FXML
     void onActionViewAll(ActionEvent event) {
-        ViewApptTableview.getItems().clear();
-        ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
+        ViewApptTableview.getItems().setAll(DataStorage.getAllAppointments());
     }
 
     @FXML
     void onActionViewMonth(ActionEvent event) {
-        ViewApptTableview.getItems().clear();
-        ViewApptTableview.getItems().addAll(DataStorage.getApptsThisMonth());
+        ViewApptTableview.getItems().setAll(DataStorage.getApptsThisMonth());
     }
 
     @FXML
     void onActionViewWeek(ActionEvent event) {
-        ViewApptTableview.getItems().clear();
-        ViewApptTableview.getItems().addAll(DataStorage.getApptsThisWeek());
+        ViewApptTableview.getItems().setAll(DataStorage.getApptsThisWeek());
     }
 
     @FXML
@@ -126,7 +123,7 @@ public class ViewAppointmentsController implements Initializable {
             Stage stage;
             Parent root;
             stage=(Stage) viewApptButton.getScene().getWindow();
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/View/AddEditAppointment.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/view/AddEditAppointment.fxml"));
             root =loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -148,6 +145,7 @@ public class ViewAppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
 
+        //Use lambda expressions to populate the table colums. Lambda expressions are less verbose which makes code easier to read.
         ViewApptTableviewNameCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCustomer().getCustomerName()));
         ViewApptTableviewDateTimeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getStartTime().toString()));
         ViewApptTableviewTypeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getApptType()));
@@ -156,5 +154,7 @@ public class ViewAppointmentsController implements Initializable {
         ViewApptTableview.sort();
 
         viewAllRadioBttn.setSelected(true);
+
+        //viewAllRadioBttn.setOnAction(actionEvent -> ViewApptTableview.getItems().setAll(DataStorage.getAllAppointments()));
     }
 }
