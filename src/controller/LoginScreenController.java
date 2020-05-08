@@ -5,6 +5,7 @@ import model.DataStorage;
 import appointment_Scheduler.Main;
 import utilities.CheckUserPassword;
 import utilities.DBConnection;
+import utilities.Logger;
 import utilities.TimeFunctions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,10 @@ public class LoginScreenController implements Initializable {
 
         ////check if user is found and password is correct
         if(CheckUserPassword.checkPassword(userName, password)) {
+            //store the user for logging and tagging appts
+            DataStorage.setStoredUser(DataStorage.lookupUser(userNameField.getText()));
+            //make an entry in the log
+            Logger.logUserAccess();
 
             //check if there is an appointment within the next 15 minutes.
             Appointment appointment = TimeFunctions.checkForUpcomingAppt();
@@ -71,7 +76,6 @@ public class LoginScreenController implements Initializable {
 
 
             // load the next screen, and store the user as currentuser in data storage
-            DataStorage.setStoredUser(DataStorage.lookupUser(userNameField.getText()));
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             stage.setTitle("Appointment Scheduler");
@@ -100,10 +104,7 @@ public class LoginScreenController implements Initializable {
 
         //Use lambda expressions to control the exit button.
         // Lambda expressions are less verbose which makes code easier to read.
-        exitProgramButton.setOnAction(event -> {
-            DBConnection.closeConnection();
-            System.exit(0);
-        });
+        exitProgramButton.setOnAction(event -> System.exit(0));
     }
 
 }

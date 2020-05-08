@@ -98,6 +98,7 @@ public class CustomerDAO {
                 }
             }
             rs.close();
+            DBConnection.closeConnection();
             DataStorage.setCustomerAddressesDownloaded(true);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -128,6 +129,7 @@ public class CustomerDAO {
                 }
             }
             rs.close();
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -164,6 +166,7 @@ public class CustomerDAO {
             } else {
                 System.out.println("Customer not added");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -202,6 +205,7 @@ public class CustomerDAO {
             } else {
                 System.out.println("Customer updated");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -227,6 +231,7 @@ public class CustomerDAO {
             } else {
                 System.out.println("Customer not deleted");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

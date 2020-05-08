@@ -73,6 +73,7 @@ public class AppointmentDAO {
                 }
             }
             rs.close();
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -116,6 +117,7 @@ public class AppointmentDAO {
             } else {
                 System.out.println("appointment not added");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -149,6 +151,7 @@ public class AppointmentDAO {
             } else {
                 System.out.println("appointment not updated");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -174,6 +177,7 @@ public class AppointmentDAO {
             } else {
                 System.out.println("Appointment not deleted");
             }
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

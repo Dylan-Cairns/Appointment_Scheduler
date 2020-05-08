@@ -32,7 +32,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     void onActionExit(ActionEvent event) {
-        DBConnection.closeConnection();
         System.exit(0);
     }
 

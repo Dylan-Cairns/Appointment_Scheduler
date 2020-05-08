@@ -106,6 +106,7 @@ public class CityDAO {
                 }
             }
             rs.close();
+            DBConnection.closeConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

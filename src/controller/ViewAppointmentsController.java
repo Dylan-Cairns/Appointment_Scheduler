@@ -148,7 +148,9 @@ public class ViewAppointmentsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ViewApptTableview.getItems().addAll(DataStorage.getAllAppointments());
 
-        //Use lambda expressions to populate the table colums. Lambda expressions are less verbose which makes code easier to read.
+        //Use lambda expressions to populate the table colums.
+        // Lambda expressions more concise which contributes to readability,
+        // and lamdas encourage functional programming.
         ViewApptTableviewNameCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getCustomer().getCustomerName()));
         ViewApptTableviewDateTimeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getStartTime().toString()));
         ViewApptTableviewTypeCol.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getApptType()));
