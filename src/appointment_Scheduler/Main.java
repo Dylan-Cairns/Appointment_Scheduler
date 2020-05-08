@@ -44,12 +44,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        System.out.println(Reports.apptSchedulePerUser());
-
-        System.out.println("done yea.");
-
         //launch GUI
-        //launch(args);
+        launch(args);
 
     }
 

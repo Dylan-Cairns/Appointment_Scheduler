@@ -55,8 +55,12 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    void onActionViewReports(ActionEvent event) {
-
+    void onActionViewReports(ActionEvent event) throws IOException {
+        stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ViewReports.fxml"));
+        stage.setTitle("View Reports");
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 
     @Override

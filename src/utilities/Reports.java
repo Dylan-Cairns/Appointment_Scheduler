@@ -4,6 +4,7 @@ import model.Appointment;
 import model.DataStorage;
 import model.User;
 
+import java.time.Duration;
 import java.time.LocalDate;
 
 public class Reports {
@@ -45,6 +46,28 @@ public class Reports {
                 if (appointment.getUserId() == user.getUserID()) {
                     report += appointment.getStartTime() + " || " + appointment.getCustomer().getCustomerName() + "\n";
                 }
+            }
+        }
+        return report;
+    }
+
+    public static String avgApptLengthPerMonth(int numofMonthsToPrint) {
+        String report = "Average appointment length per month for the next " + numofMonthsToPrint + " months: \n \n";
+        for (int i = 0; i < numofMonthsToPrint; i++) {
+            report += LocalDate.now().getMonth().plus(i) + ": \n";
+            int totalCombinedApptTime = 0;
+            int numOfAppts = 0;
+            for (Appointment appointment : DataStorage.getAllAppointments()) {
+                if (appointment.getStartTime().getMonth().equals(LocalDate.now().getMonth().plus(i))) {
+                    numOfAppts++;
+                    totalCombinedApptTime += (Duration.between(appointment.getStartTime(), appointment.getEndTime()).toMinutes());
+                }
+            }
+            if (numOfAppts == 0) {
+                report += "No appointments. \n \n";
+            }
+            else {
+                report += (totalCombinedApptTime / numOfAppts) + " minutes. \n \n";
             }
         }
         return report;

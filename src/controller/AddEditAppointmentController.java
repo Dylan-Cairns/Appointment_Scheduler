@@ -147,8 +147,6 @@ public class AddEditAppointmentController implements Initializable {
         LocalDate ld = datePickerBox.getValue();
         LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime selectedTime = ld.atTime(lt);
-        System.out.println(selectedTime);
-        System.out.println(LocalDateTime.now());
         if (selectedTime.isBefore(LocalDateTime.now())) {
             startTimeComboBox.getSelectionModel().clearSelection();
             startTimeComboBox.getItems().setAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
