@@ -37,7 +37,7 @@ public class Reports {
     }
 
     public static String apptSchedulePerUser() {
-        String report = "Complete appointment schedule for each user: \n";
+        String report = "Complete appointment schedule for each user: \n \n";
         for (User user : DataStorage.getAllUsers()) {
             report += "Username: " + user.getUserName() + "\n" +
                     "Appointment time || Customer name \n" +

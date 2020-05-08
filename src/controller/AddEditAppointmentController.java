@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -63,64 +64,91 @@ public class AddEditAppointmentController implements Initializable {
 
     @FXML
     void onActionSaveAppt(ActionEvent event) {
-        try {
-            //get customer
-            Customer customer = DataStorage.getStoredAppointment().getCustomer();
-            //get appt type
-            String apptType = apptTypeComboBox.getSelectionModel().getSelectedItem();
-            //Get start and finish times
-            LocalDate ld = datePickerBox.getValue();
-            LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
-            LocalDateTime startTime = ld.atTime(lt);
-            int apptLength = Integer.parseInt(apptLengthComboBox.getSelectionModel().getSelectedItem().substring(0, 2));
-            LocalDateTime endTime = startTime.plusMinutes(apptLength);
-            /* if the userId is -1, that means the appt is new. if not it is an existing appt.
-             */
-            boolean savesuccesfull;
-            if (DataStorage.getStoredAppointment().getUserId() != -1){
-                //this is an existing appt. run an update command
-                int apptId = DataStorage.getStoredAppointment().getAppointmentId();
-                int userId = DataStorage.getStoredAppointment().getUserId();
-                Appointment appointment = new Appointment(apptId, customer, userId, apptType, startTime, endTime);
-                savesuccesfull = AppointmentDAO.updateAppointment(appointment);
-            }
-            else {
-                //this is a new appointment. run insert command
-
-                //get current user userID
-                int userId = DataStorage.getStoredUser().getUserID();
-                Appointment appointment = new Appointment(customer,
-                        userId, apptType, startTime, endTime);
-                savesuccesfull = AppointmentDAO.addNewAppointment(appointment);
-            }
-
-            if(savesuccesfull) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment Saved");
-                alert.setContentText("Appointment Successfully saved.");
-                AppointmentDAO.getAllAppointments();
-                stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
-                stage.setTitle("View Appointments");
-                stage.setScene(new Scene(scene));
-                stage.show();
-            }
-            else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Save failed");
-                alert.setContentText("Appointment not saved.");
-            }
-            //clear the customer variable saved in storage
-            DataStorage.clearStoredCustomer();
-        }
-        catch(NumberFormatException | IOException e)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Please enter valid values in all fields.");
+        //check that there required information is comlete
+        if(datePickerBox.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select a date");
             alert.showAndWait();
         }
+        else if(startTimeComboBox.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select a start time");
+            alert.showAndWait();
+        }
+        else if(apptLengthComboBox.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select an appointment length");
+            alert.showAndWait();
+        }
+        else if(apptTypeComboBox.getValue() == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select an appointment type");
+            alert.showAndWait();
+        }
+        else {
+            //if all required field are entered, save appointment
+            try {
+                //get customer
+                Customer customer = DataStorage.getStoredAppointment().getCustomer();
+                //get appt type
+                String apptType = apptTypeComboBox.getSelectionModel().getSelectedItem();
+                //Get start and finish times
+                LocalDate ld = datePickerBox.getValue();
+                LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
+                LocalDateTime startTime = ld.atTime(lt);
+                int apptLength = Integer.parseInt(apptLengthComboBox.getSelectionModel().getSelectedItem().substring(0, 2));
+                LocalDateTime endTime = startTime.plusMinutes(apptLength);
+                /* if the userId is -1, that means the appt is new. if not it is an existing appt.
+                 */
+                boolean savesuccesfull;
+                if (DataStorage.getStoredAppointment().getUserId() != -1){
+                    //this is an existing appt. run an update command
+                    int apptId = DataStorage.getStoredAppointment().getAppointmentId();
+                    int userId = DataStorage.getStoredAppointment().getUserId();
+                    Appointment appointment = new Appointment(apptId, customer, userId, apptType, startTime, endTime);
+                    savesuccesfull = AppointmentDAO.updateAppointment(appointment);
+                }
+                else {
+                    //this is a new appointment. run insert command
 
+                    //get current user userID
+                    int userId = DataStorage.getStoredUser().getUserID();
+                    Appointment appointment = new Appointment(customer,
+                            userId, apptType, startTime, endTime);
+                    savesuccesfull = AppointmentDAO.addNewAppointment(appointment);
+                }
+
+                if(savesuccesfull) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Appointment Saved");
+                    alert.setContentText("Appointment Successfully saved.");
+                    AppointmentDAO.getAllAppointments();
+                    stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+                    scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
+                    stage.setTitle("View Appointments");
+                    stage.setScene(new Scene(scene));
+                    stage.show();
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Save failed");
+                    alert.setContentText("Appointment not saved.");
+                }
+                //clear the customer variable saved in storage
+                DataStorage.clearStoredCustomer();
+            }
+            catch(NumberFormatException | IOException e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Dialog");
+                alert.setContentText("Please enter valid values in all fields.");
+                alert.showAndWait();
+            }
+        }
     }
 
 
@@ -137,6 +165,13 @@ public class AddEditAppointmentController implements Initializable {
                     "current date or up to three months in advance");
             alert.showAndWait();
         }
+        else if(datePickerBox.getValue().getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
+                datePickerBox.getValue().getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Appointments may only be scheduled for Monday through Friday");
+            alert.showAndWait();
+        }
         else {
             startTimeComboBox.getItems().setAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
         }
@@ -148,8 +183,6 @@ public class AddEditAppointmentController implements Initializable {
         LocalTime lt = startTimeComboBox.getSelectionModel().getSelectedItem();
         LocalDateTime selectedTime = ld.atTime(lt);
         if (selectedTime.isBefore(LocalDateTime.now())) {
-            startTimeComboBox.getSelectionModel().clearSelection();
-            startTimeComboBox.getItems().setAll(TimeFunctions.getTimeslots(datePickerBox.getValue()));
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("Please select a time later than now");

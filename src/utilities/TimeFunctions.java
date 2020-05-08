@@ -70,12 +70,17 @@ public class TimeFunctions {
                         + ":" + quarterHourPeriod + ":00.0");
                 DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd kk:mm:ss.S");
                 LocalDateTime timeBlock = LocalDateTime.parse(timeBlockString, df);
-                nineToFiveSchedule.add(timeBlock);
+                //check if the date entered is todays date.
+                // If so, do not allow timeblocks before the current time.
+                if(selectedDate.isEqual(LocalDate.now()) && timeBlock.isAfter(LocalDateTime.now())) {
+                    nineToFiveSchedule.add(timeBlock);
+                }
+                else if(selectedDate.isAfter(LocalDate.now())) {
+                    //if it's later than today's date, add all the time blocks
+                        nineToFiveSchedule.add(timeBlock);
+                    }
             }
         }
-        //remove the last item in the list, which is the 16:45 timeslot.
-        //this time is too late to schedule an appointment.
-        nineToFiveSchedule.remove(nineToFiveSchedule.size() -1);
         //return generated list
         return nineToFiveSchedule;
     }
