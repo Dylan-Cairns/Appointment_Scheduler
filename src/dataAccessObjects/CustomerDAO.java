@@ -180,8 +180,8 @@ public class CustomerDAO {
             // start the database connection with an instance variable
             Connection conn = DBConnection.getConnection();
             //Create string to use in prepared statement
-            String insertStatement = "UPDATE customer set customerName=? addressId=? " +
-                    "active=? createDate=? createdBy=? lastUpdate=? lastUpdateBy=? WHERE customerId = ?";
+            String insertStatement = "UPDATE customer set customerName=?, addressId=?, " +
+                    "active=?, createDate=?, createdBy=?, lastUpdate=?, lastUpdateBy=? WHERE customerId = ?";
             //Set prepared statement in DBQuery class
             DBQuery.setPreparedStatement(conn, insertStatement);
             //Instantiate prepared statement

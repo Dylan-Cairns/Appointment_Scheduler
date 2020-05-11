@@ -55,6 +55,11 @@ public class AddEditAppointmentController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK)
         {
+/*          When this screen was initialized the currently selected appointment to edit
+            was removed from the local appts list in order to make the timeslot available
+            for time generation functions. Since the user cancelled the edit, we must
+            add the appointment back to the local appts list.*/
+            DataStorage.addAppointment(DataStorage.getStoredAppointment());
             stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/ViewAppointments.fxml"));
             stage.setScene(new Scene(scene));
@@ -205,7 +210,9 @@ public class AddEditAppointmentController implements Initializable {
     public void receiveAppointment(Appointment appointment) {
         DataStorage.setStoredAppointment(appointment);
         nameTextBox.setText(appointment.getCustomer().getCustomerName());
-
+        //remove the appointment being edited from the local appointments list. This will
+        // cause the timeslot generating functions to make the previously selected timeslot available.
+        DataStorage.removeAppointment(appointment);
     }
 
     @Override

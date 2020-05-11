@@ -17,7 +17,7 @@ public class DataStorage {
     private static User storedUser = null;
     private static Appointment storedAppointment = null;
     private static boolean customerAddressesDownloaded;
-    private static final ObservableList<Appointment> apptList = FXCollections.observableArrayList();
+    private static ObservableList<Appointment> apptList = FXCollections.observableArrayList();
 
     public static ObservableList<User> getAllUsers() {
         if(userList.isEmpty()) {
@@ -87,6 +87,8 @@ public class DataStorage {
     public static void addAppointment(Appointment appointment) {
         apptList.add(appointment);
     }
+
+    public static void removeAppointment(Appointment appointment) {apptList.remove(appointment);}
 
     public static User getStoredUser() {
         return storedUser;

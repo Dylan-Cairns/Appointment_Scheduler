@@ -110,11 +110,13 @@ public class AddEditCustomerController implements Initializable {
              */
                 boolean savesuccesfull;
                 if (DataStorage.getStoredCustomer() != null){
+                    //this is an update
                     int customerId = DataStorage.getStoredCustomer().getCustomerID();
                     Customer customer = new Customer(customerId, name, address);
                     savesuccesfull = CustomerDAO.updateCustomer(customer);
                 }
                 else {
+                    //this is an insert
                     Customer customer = new Customer(name, address);
                     savesuccesfull = CustomerDAO.addNewCustomer(customer);
                 }
@@ -158,6 +160,7 @@ public class AddEditCustomerController implements Initializable {
         address2TextField.setText(customer.getAddress().getAddressLine2());
         cityComboBox.setItems(DataStorage.getAllCities());
         cityComboBox.getSelectionModel().select(customer.getAddress().getCity());
+        postalCodeTextBox.setText(customer.getAddress().getPostalCode());
     }
 
 
