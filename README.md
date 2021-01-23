@@ -47,3 +47,8 @@ When editing or adding a new appointment, the application first checks the time 
 User access logs are written to a text file.
 
 ![Login Screen](/screenshots/9.png)
+
+## Learning Outcomes
+This project gave me a chance to work with an application that interacts with an already established database, and thinking about questions of how to achieve the required functionality based on outside restrictions placed on the database.
+
+It also raised interesting questions for me regarding when to program for resource efficiency and when to program for reusability and readability.
